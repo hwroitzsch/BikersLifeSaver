@@ -1,0 +1,13 @@
+# install other packages needed in context of work with opencv
+
+conda create -n opencv-env python=3.4 scipy numpy matplotlib
+
+# activate the environment to install the opencv package from repositories
+# the environment needs to be activated so that the install is not for anaconda 3 itself, but only for this environment
+
+source activate opencv-env
+
+# install opencv from a repository
+# the repository was found on https://anaconda.org/menpo/opencv3
+
+conda install -c https://conda.anaconda.org/menpo opencv3

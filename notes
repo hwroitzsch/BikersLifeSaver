@@ -1,0 +1,14 @@
+value mehr nutzen
+value von umgebung einbeziehen
+hoehe im bild
+kernel groeße von aufloesung abhaengig waehlen
+
+Value als helligkeitswert nutzen oder RGB mitteln (V formel oder RGB fuer V)
+Segmentierung mit schwelle
+kann als maske fuer HSV Segment verwendet werden
+
+optischer fluss zum tracking?
+vielleicht template matching mit V von HSV umgebung ist dunkler
+Güterverkehrszentrum in Potsdam
+
+vielleicht nicht-Autos ausschließen mit autoeigenschaften die nicht gefunden werden
