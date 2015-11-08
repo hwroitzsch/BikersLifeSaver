@@ -5,23 +5,23 @@ import os
 
 print('using OpenCV version:', opencv.__version__)
 
-# image_directory = 'direction_indicator_active_night/'
+image_directory = 'direction_indicator_active_night/'
+# image_directory = 'direction_indicator_active_web/'
 # image_directory = 'direction_indicator_inactive_night/'
-image_directory = ''
 
 allowed_formats = ['png', 'jpg', 'jpeg']
 
 # correctly detected active : 40 of 70
 # not detected active: 30 of 70
 # false positives: 3 of 103
-# lower_blinker_hsv = np.uint8([80,150,220])
-# upper_blinker_hsv = np.uint8([100,220,255])
+lower_blinker_hsv = np.uint8([80,150,220])
+upper_blinker_hsv = np.uint8([100,220,255])
 
 # correctly detected active : 58 of 70
 # not detected active: 12 of 70
 # false positives: 46 of 103
-lower_blinker_hsv = np.uint8([80,100,220])
-upper_blinker_hsv = np.uint8([100,220,255])
+# lower_blinker_hsv = np.uint8([80,100,220])
+# upper_blinker_hsv = np.uint8([100,220,255])
 
 print('lower blinker hsv:', lower_blinker_hsv)
 print('upper blinker hsv:', upper_blinker_hsv)
