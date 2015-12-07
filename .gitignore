@@ -9,3 +9,6 @@ images_videos/
 opencv_direction_indicator_detection/direction_indicator_active_night/
 opencv_direction_indicator_detection/direction_indicator_active_web/
 opencv_direction_indicator_detection/direction_indicator_inactive_night/
+
+raspberry_edimax_usb_wlan_adapter_driver
+raspberry_image
