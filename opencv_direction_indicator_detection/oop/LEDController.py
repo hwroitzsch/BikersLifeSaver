@@ -6,6 +6,7 @@ from WarningLevel import WarningLevel
 
 __author__ = 'Hans-Werner Roitzsch'
 
+
 class LEDController(ActorController):
 	def __init__():
 		pass
@@ -35,7 +36,6 @@ class LEDController(ActorController):
 	def set_led_yellow(self):
 		self.switch_off_leds()
 		self.set_pin(GPIOPin.PIN_RGB_GREEN, GPIOPin.STATUS_HIGH)
-
 
 	def set_pin(self, gpio_pin, status):
 		wiringpi.digitalWrite(gpio_pin, status)

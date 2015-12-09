@@ -6,6 +6,7 @@ from CameraData import CameraData
 
 __author__ = 'Hans-Werner Roitzsch'
 
+
 class CameraAdapter(SensorAdapter):
 	def __init__(self):
 		pass

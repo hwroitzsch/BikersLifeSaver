@@ -2,6 +2,7 @@ from datetime import datetime
 
 __author__ = 'Hans-Werner Roitzsch'
 
+
 class Event:
 	def __init__(
 		self,

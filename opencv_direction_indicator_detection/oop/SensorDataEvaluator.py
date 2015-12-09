@@ -1,5 +1,6 @@
 __author__ = 'Hans-Werner Roitzsch'
 
+
 class SensorDataEvaluator:
 	def __init__(self):
 		pass

@@ -6,12 +6,13 @@ import numpy as np
 
 __author__ = 'Hans-Werner Roitzsch'
 
+
 class CameraDataProcessor(SensorDataProcessor):
 	def __init__(self):
 		print('using OpenCV version:', opencv.__version__)
 
-		self.lower_blinker_hsv = np.uint8([80,150,220])
-		self.upper_blinker_hsv = np.uint8([100,220,255])
+		self.lower_blinker_hsv = np.uint8([80, 150, 220])
+		self.upper_blinker_hsv = np.uint8([100, 220, 255])
 
 	def create_kernel(rows=3, cols=3):
 		return np.ones((rows, cols), dtype=np.int)
@@ -30,13 +31,13 @@ class CameraDataProcessor(SensorDataProcessor):
 
 	def remove_border(image, top, bottom, left, right):
 		rows_and_cols = image.shape
-		return image[top:rows_and_cols[0]-bottom, left:rows_and_cols[1]-right]
+		return image[top:rows_and_cols[0] - bottom, left:rows_and_cols[1] - right]
 
 	def process_data(camera_data):
 		image = camera_data
 		if image.shape is not None:
 			# mean filter to reduce noise
-			kernel = np.ones((6,6), dtype=np.float32)/36
+			kernel = np.ones((6, 6), dtype=np.float32) / 36
 			mean_filtered = opencv.filter2D(image, -1, kernel)
 
 			# convert to HSV image

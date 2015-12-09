@@ -6,6 +6,7 @@ from WarningLevel import WarningLevel
 
 __author__ = 'Hans-Werner Roitzsch'
 
+
 class SpeakerController(ActorController):
 	def __init__(self):
 		self.frequenzy = 3500
