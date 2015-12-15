@@ -3,6 +3,7 @@ import picamera
 import picamera.array
 
 from CameraData import CameraData
+from SensorAdapter import SensorAdapter
 
 __author__ = 'Hans-Werner Roitzsch'
 

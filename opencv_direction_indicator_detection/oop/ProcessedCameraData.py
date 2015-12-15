@@ -1,3 +1,4 @@
+from ProcessedSensorData import ProcessedSensorData
 
 __author__ = 'Hans-Werner Roitzsch'
 

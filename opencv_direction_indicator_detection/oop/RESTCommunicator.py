@@ -1,3 +1,5 @@
+from NetworkCommunicator import NetworkCommunicator
+
 __author__ = 'Hans-Werner Roitzsch'
 
 

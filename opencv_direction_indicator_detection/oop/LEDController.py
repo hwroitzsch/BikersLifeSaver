@@ -2,7 +2,9 @@ import wiringpi2 as wiringpi
 
 from GPIOPin import GPIOPin
 from PinMode import PinMode
+
 from WarningLevel import WarningLevel
+from ActorController import ActorController
 
 __author__ = 'Hans-Werner Roitzsch'
 
@@ -12,10 +14,10 @@ class LEDController(ActorController):
 		pass
 
 	def start_warning(self, warning_level):
-		if warning_level == WarningLevel.HAZARD_SPOT_WARNING:
+		if warning_level == WarningLevel.HAZARD_SPOT_WARNING.value:
 			self.set_led_yellow()
 
-		else if warning_level == WarningLevel.DANGEROUS_SITUATION_WARNING:
+		else if warning_level == WarningLevel.DANGEROUS_SITUATION_WARNING.value:
 			self.set_led_red()
 
 	def stop_warning(self):
@@ -23,27 +25,27 @@ class LEDController(ActorController):
 
 	def set_led_red(self):
 		self.switch_off_leds()
-		self.set_pin(GPIOPin.PIN_RGB_RED, GPIOPin.STATUS_HIGH)
+		self.set_pin(GPIOPin.PIN_RGB_RED.value, GPIOPin.STATUS_HIGH.value)
 
 	def set_led_green(self):
 		self.switch_off_leds()
-		self.set_pin(GPIOPin.PIN_RGB_GREEN, GPIOPin.STATUS_HIGH)
+		self.set_pin(GPIOPin.PIN_RGB_GREEN.value, GPIOPin.STATUS_HIGH.value)
 
 	def set_led_blue(self):
 		self.switch_off_leds()
-		self.set_pin(GPIOPin.PIN_RGB_GREEN, GPIOPin.STATUS_HIGH)
+		self.set_pin(GPIOPin.PIN_RGB_GREEN.value, GPIOPin.STATUS_HIGH.value)
 
 	def set_led_yellow(self):
 		self.switch_off_leds()
-		self.set_pin(GPIOPin.PIN_RGB_GREEN, GPIOPin.STATUS_HIGH)
+		self.set_pin(GPIOPin.PIN_RGB_GREEN.value, GPIOPin.STATUS_HIGH.value)
 
 	def set_pin(self, gpio_pin, status):
 		wiringpi.digitalWrite(gpio_pin, status)
 
 	def switch_off_leds(self):
-		wiringpi.digitalWrite(GPIOPin.PIN_RGB_RED, GPIOPin.STATUS_LOW)
-		wiringpi.digitalWrite(GPIOPin.PIN_RGB_GREEN, GPIOPin.STATUS_LOW)
-		wiringpi.digitalWrite(GPIOPin.PIN_RGB_BLUE, GPIOPin.STATUS_LOW)
+		wiringpi.digitalWrite(GPIOPin.PIN_RGB_RED.value, GPIOPin.STATUS_LOW.value)
+		wiringpi.digitalWrite(GPIOPin.PIN_RGB_GREEN.value, GPIOPin.STATUS_LOW.value)
+		wiringpi.digitalWrite(GPIOPin.PIN_RGB_BLUE.value, GPIOPin.STATUS_LOW.value)
 
 # def switch_led_on():
 # 	GPIO.output(LED_GPIO_PIN_NUMBER, True)  # switch it on!

@@ -3,10 +3,19 @@ import sched
 from datetime import datetime
 
 import wiringpi2 as wiringpi
+import picamera
 
+# import enums
 from WarningLevel import WarningLevel
 from GPIOPin import GPIOPin
 from PinMode import PinMode
+
+# import classes
+from CameraAdapter import CameraAdapter
+from CameraDataProcessor import CameraDataProcessor
+from LEDController import LEDController
+from SpeakerController import SpeakerController
+from SensorDataEvaluator import SensorDataEvaluator
 
 __author__ = 'Hans-Werner Roitzsch'
 
@@ -14,7 +23,7 @@ __author__ = 'Hans-Werner Roitzsch'
 class BikerApp:
 
 	def __init__(self):
-		initialize_hardware()
+		self.initialize_hardware()
 
 		self.camera_adapter = CameraAdapter()
 		self.camera_data_processor = CameraDataProcessor()
@@ -40,11 +49,11 @@ class BikerApp:
 
 	def initialize_hardware(self):
 		wiringpi.wiringPiSetup()
-		wiringpi.pinMode(GPIOPin.PIN_STATUS_LED, PinMode.OUTPUT)
-		wiringpi.pinMode(GPIOPin.PIN_SOUND, PinMode.OUTPUT)
-		wiringpi.pinMode(GPIOPin.PIN_RGB_RED, PinMode.OUTPUT)
-		wiringpi.pinMode(GPIOPin.PIN_RGB_GREEN, PinMode.OUTPUT)
-		wiringpi.pinMode(GPIOPin.PIN_RGB_BLUE, PinMode.OUTPUT)
+		wiringpi.pinMode(GPIOPin.PIN_STATUS_LED.value, PinMode.OUTPUT.value)
+		wiringpi.pinMode(GPIOPin.PIN_SOUND.value, PinMode.OUTPUT.value)
+		wiringpi.pinMode(GPIOPin.PIN_RGB_RED.value, PinMode.OUTPUT.value)
+		wiringpi.pinMode(GPIOPin.PIN_RGB_GREEN.value, PinMode.OUTPUT.value)
+		wiringpi.pinMode(GPIOPin.PIN_RGB_BLUE.value, PinMode.OUTPUT.value)
 
 	def run(self):
 		task_priority = 1

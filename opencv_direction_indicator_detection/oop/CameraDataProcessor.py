@@ -4,6 +4,8 @@ import datetime
 import cv2 as opencv
 import numpy as np
 
+from SensorDataProcessor import SensorDataProcessor
+
 __author__ = 'Hans-Werner Roitzsch'
 
 

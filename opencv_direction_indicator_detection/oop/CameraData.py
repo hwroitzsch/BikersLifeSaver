@@ -1,3 +1,5 @@
+from SensorData import SensorData
+
 __author__ = 'Hans-Werner Roitzsch'
 
 

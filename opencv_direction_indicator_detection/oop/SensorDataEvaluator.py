@@ -13,6 +13,6 @@ class SensorDataEvaluator:
 		# a warning should be given and an event sent.
 
 		if processed_sensor_data.result:
-			self.led_controller.start_warning(WarningLevel.DANGEROUS_SITUATION_WARNING)
-			self.speaker_controller.start_warning(WarningLevel.DANGEROUS_SITUATION_WARNING)
+			self.led_controller.start_warning(WarningLevel.DANGEROUS_SITUATION_WARNING.value)
+			self.speaker_controller.start_warning(WarningLevel.DANGEROUS_SITUATION_WARNING.value)
 			# TODO: Send a message to the server about the dangerous situation event
