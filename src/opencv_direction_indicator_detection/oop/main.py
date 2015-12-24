@@ -61,7 +61,7 @@ class BikerApp:
 		scheduler = sched.scheduler()  # default is time.monotonic and time.sleep
 
 		def do_something(scheduler):
-			analyze_camera()
+			self.analyze_camera()
 			scheduler.enter(run_count, task_priority, do_something, (scheduler,))
 
 		scheduler.enter(run_count, task_priority, do_something, (scheduler,))
