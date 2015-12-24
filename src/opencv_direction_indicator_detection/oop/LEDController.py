@@ -10,7 +10,7 @@ __author__ = 'Hans-Werner Roitzsch'
 
 
 class LEDController(ActorController):
-	def __init__():
+	def __init__(self):
 		pass
 
 	def start_warning(self, warning_level):
