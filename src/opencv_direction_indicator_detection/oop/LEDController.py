@@ -17,7 +17,7 @@ class LEDController(ActorController):
 		if warning_level == WarningLevel.HAZARD_SPOT_WARNING.value:
 			self.set_led_yellow()
 
-		else if warning_level == WarningLevel.DANGEROUS_SITUATION_WARNING.value:
+		elif warning_level == WarningLevel.DANGEROUS_SITUATION_WARNING.value:
 			self.set_led_red()
 
 	def stop_warning(self):
