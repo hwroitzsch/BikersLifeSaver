@@ -12,7 +12,7 @@ class CameraAdapter(SensorAdapter):
 	def __init__(self):
 		pass
 
-	def get_data():
+	def get_data(self):
 		with picamera.PiCamera() as camera:
 			camera.resolution = (1024, 768)
 			camera.framerate = 24
