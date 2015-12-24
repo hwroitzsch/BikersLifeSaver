@@ -16,4 +16,5 @@ class ActorController(metaclass=ABCMeta):
 		return
 
 	@abstractmethod
-	def stop_warning(self)
+	def stop_warning(self):
+		return
