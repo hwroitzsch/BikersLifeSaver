@@ -12,8 +12,13 @@ __author__ = 'Hans-Werner Roitzsch'
 class SpeakerController(ActorController):
 	def __init__(self):
 		self.frequenzy = 3500
+		self.stop_frequency = 0
 
 	def start_warning(self, warning_level):
 		if warning_level == WarningLevel.DANGEROUS_SITUATION_WARNING.value:
 			wiringpi.softToneCreate(GPIOPin.PIN_SOUND.value)
 			wiringpi.softToneWrite(GPIOPin.PIN_SOUND.value, self.frequenzy)
+
+	def stop_warning(self):
+		wiringpi.softToneCreate(GPIOPin.PIN_SOUND.value)
+		wiringpi.softToneWrite(GPIOPin.PIN_SOUND.value, self.stop_frequency)
