@@ -20,3 +20,6 @@ class SensorDataEvaluator:
 			self.led_controller.start_warning(WarningLevel.DANGEROUS_SITUATION_WARNING.value)
 			self.speaker_controller.start_warning(WarningLevel.DANGEROUS_SITUATION_WARNING.value)
 			# TODO: Send a message to the server about the dangerous situation event
+		else:
+			self.led_controller.stop_warning()
+			self.speaker_controller.stop_warning()
