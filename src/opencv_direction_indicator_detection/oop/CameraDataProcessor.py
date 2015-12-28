@@ -16,14 +16,14 @@ class CameraDataProcessor(SensorDataProcessor):
 		self.lower_blinker_hsv = np.uint8([80, 150, 220])
 		self.upper_blinker_hsv = np.uint8([100, 220, 255])
 
-	def create_kernel(rows=3, cols=3):
+	def create_kernel(self, rows=3, cols=3):
 		return np.ones((rows, cols), dtype=np.int)
 
-	def print_rows_cols(image):
+	def print_rows_cols(self, image):
 		rows_and_cols = image.shape
 		print('Rows and cols:', rows_and_cols)
 
-	def add_border(image, top, bottom, left, right, color=0):
+	def add_border(self, image, top, bottom, left, right, color=0):
 		return opencv.copyMakeBorder(
 			image,
 			top, bottom, left, right,
@@ -31,11 +31,11 @@ class CameraDataProcessor(SensorDataProcessor):
 			value=color
 		)
 
-	def remove_border(image, top, bottom, left, right):
+	def remove_border(self, image, top, bottom, left, right):
 		rows_and_cols = image.shape
 		return image[top:rows_and_cols[0] - bottom, left:rows_and_cols[1] - right]
 
-	def process_data(camera_data):
+	def process_data(self, camera_data):
 		image = camera_data
 		if image.shape is not None:
 			# mean filter to reduce noise
