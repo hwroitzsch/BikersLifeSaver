@@ -1,5 +1,6 @@
 import sys
 import os
+import cv2 as opencv
 
 class ImageFileWriter:
 	def __init__(self):
