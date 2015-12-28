@@ -12,8 +12,8 @@ class CameraAdapter(SensorAdapter):
 	def __init__(self):
 		try:
 			self.camera = picamera.PiCamera()
-			camera.resolution = (1024, 768)
-			camera.framerate = 24
+			self.camera.resolution = (1024, 768)
+			self.camera.framerate = 24
 			time.sleep(2)
 		except Exception as ex:
 			print('Problem with camera.')
