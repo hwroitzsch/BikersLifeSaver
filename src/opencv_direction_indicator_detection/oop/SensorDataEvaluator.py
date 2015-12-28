@@ -1,9 +1,12 @@
 __author__ = 'Hans-Werner Roitzsch'
 
+from LEDController import LEDController
+from SpeakerController import SpeakerController
 
 class SensorDataEvaluator:
 	def __init__(self):
-		pass
+		self.led_controller = LEDController()
+		self.speaker_controller = SpeakerController()
 
 	def evaluate(self, processed_sensor_data):
 		# TODO:
