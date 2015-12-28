@@ -5,6 +5,7 @@ import cv2 as opencv
 import numpy as np
 
 from SensorDataProcessor import SensorDataProcessor
+from ProcessedCameraData import ProcessedCameraData
 
 __author__ = 'Hans-Werner Roitzsch'
 
