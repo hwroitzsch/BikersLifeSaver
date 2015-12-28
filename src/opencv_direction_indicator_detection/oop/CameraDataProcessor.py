@@ -49,7 +49,7 @@ class CameraDataProcessor(SensorDataProcessor):
 			mask_image = opencv.inRange(hsv_image, self.lower_blinker_hsv, self.upper_blinker_hsv)  # select only the pixels with HSV in the given range
 
 			# closing to make segments compact
-			kernel = create_kernel(rows=40, cols=40)
+			kernel = self.create_kernel(rows=40, cols=40)
 			closing_image = opencv.morphologyEx(mask_image, opencv.MORPH_CLOSE, kernel)
 
 			# create border around the image to create "fair" conditions for each pixel in the closing and erode step
@@ -57,14 +57,20 @@ class CameraDataProcessor(SensorDataProcessor):
 			border_bottom = 3
 			border_left = 3
 			border_right = 3
-			bordered_image = add_border(closing_image, border_top, border_bottom, border_left, border_right)
+			bordered_image = self.add_border(closing_image, border_top, border_bottom, border_left, border_right)
 
 			# erode to remove noise
-			kernel = create_kernel(rows=3, cols=3)
+			kernel = self.create_kernel(rows=3, cols=3)
 			eroded_image = opencv.erode(bordered_image, kernel=kernel, iterations=3)
 
 			# remove border for bitwise AND operation with original image
-			eroded_image = remove_border(eroded_image, border_top, border_bottom, border_left, border_right)
+			eroded_image = self.remove_border(
+				eroded_image,
+				border_top,
+				border_bottom,
+				border_left,
+				border_right
+			)
 
 			# set the result
 			result_image = eroded_image
