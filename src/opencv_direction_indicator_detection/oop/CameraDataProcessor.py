@@ -86,9 +86,9 @@ class CameraDataProcessor(SensorDataProcessor):
 
 				# TODO: candidate for asyncIO???
 				self.image_file_writer.write_images(
-					'test_image_' + str(self.processed_image_counter),
+					'test_image_' + str(self.processed_image_counter) + '.PNG',
 					image,
-					'test_image_eroded_' + str(self.processed_image_counter),
+					'test_image_eroded_' + str(self.processed_image_counter) + '.PNG',
 					result_image
 				)
 				return ProcessedCameraData(probability=100.0, result=True)
