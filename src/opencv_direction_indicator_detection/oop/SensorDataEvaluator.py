@@ -2,6 +2,7 @@ __author__ = 'Hans-Werner Roitzsch'
 
 from LEDController import LEDController
 from SpeakerController import SpeakerController
+from WarningLevel import WarningLevel
 
 class SensorDataEvaluator:
 	def __init__(self):
