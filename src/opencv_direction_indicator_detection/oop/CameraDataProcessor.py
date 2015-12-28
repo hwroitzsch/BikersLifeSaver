@@ -6,16 +6,21 @@ import numpy as np
 
 from SensorDataProcessor import SensorDataProcessor
 from ProcessedCameraData import ProcessedCameraData
+from ImageFileWriter import ImageFileWriter
 
 __author__ = 'Hans-Werner Roitzsch'
 
 
 class CameraDataProcessor(SensorDataProcessor):
 	def __init__(self):
+		self.image_file_writer = ImageFileWriter()
+		self.processed_image_counter = 0
+
 		print('using OpenCV version:', opencv.__version__)
 
 		self.lower_blinker_hsv = np.uint8([80, 150, 220])
 		self.upper_blinker_hsv = np.uint8([100, 220, 255])
+
 
 	def create_kernel(self, rows=3, cols=3):
 		return np.ones((rows, cols), dtype=np.int)
@@ -78,7 +83,17 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			if any(255 in x for x in result_image):
 				print('found direction indicator')
+
+				# TODO: candidate for asyncIO???
+				self.image_file_writer.write_images(
+					'test_image_' + self.processed_image_counter,
+					image,
+					'test_image_eroded_' + self.processed_image_counter,
+					result_image
+				)
 				return ProcessedCameraData(probability=100.0, result=True)
 			else:
 				print('no direction indicator found')
 				return ProcessedCameraData(probability=100.0, result=False)
+
+			self.processed_image_counter += 1
