@@ -36,7 +36,7 @@ class CameraDataProcessor(SensorDataProcessor):
 		return image[top:rows_and_cols[0] - bottom, left:rows_and_cols[1] - right]
 
 	def process_data(self, camera_data):
-		image = camera_data
+		image = camera_data.data
 		if image.shape is not None:
 			# mean filter to reduce noise
 			kernel = np.ones((6, 6), dtype=np.float32) / 36
