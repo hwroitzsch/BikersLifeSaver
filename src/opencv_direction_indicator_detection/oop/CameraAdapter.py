@@ -10,17 +10,30 @@ __author__ = 'Hans-Werner Roitzsch'
 
 class CameraAdapter(SensorAdapter):
 	def __init__(self):
-		pass
-
-	def get_data(self):
-		with picamera.PiCamera() as camera:
+		try:
+			self.camera = picamera.PiCamera()
 			camera.resolution = (1024, 768)
 			camera.framerate = 24
 			time.sleep(2)
+		except Exception as ex:
+			print('Problem with camera.')
 
-			with picamera.array.PiRGBArray(camera) as stream:
-				camera.start_preview()
-				camera.capture(stream, format='rgb')
+	def get_data(self):
+		# with picamera.PiCamera() as camera:
+		# 	camera.resolution = (1024, 768)
+		# 	camera.framerate = 24
+		# 	time.sleep(2)
 
-				timestamp = int(round(time.time() * 1000))
-				return CameraData(stream.array, timestamp)
+			# with picamera.array.PiRGBArray(camera) as stream:
+			# 	camera.start_preview()
+			# 	camera.capture(stream, format='rgb')
+			#
+			# 	timestamp = int(round(time.time() * 1000))
+			# 	return CameraData(stream.array, timestamp)
+
+		with picamera.array.PiRGBArray(self.camera) as stream:
+			self.camera.start_preview()
+			self.camera.capture(stream, format='rgb')
+
+			timestamp = int(round(time.time() * 1000))
+			return CameraData(stream.array, timestamp)
