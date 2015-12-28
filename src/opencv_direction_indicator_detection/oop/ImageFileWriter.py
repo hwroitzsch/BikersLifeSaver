@@ -16,5 +16,7 @@ class ImageFileWriter:
 			while index < len(args):
 				file_name = args[index+0]
 				image_data = args[index+1]
-				opencv.imwrite(os.path.join(image_directory, file_name), image_data, (opencv.IMWRITE_PNG_COMPRESSION, 0))
+				file_path = os.path.join(image_directory, file_name)
+				print('wrote image file to', file_path)
+				opencv.imwrite(file_path, image_data, (opencv.IMWRITE_PNG_COMPRESSION, 0))
 				index += 2
