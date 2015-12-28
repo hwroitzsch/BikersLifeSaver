@@ -15,10 +15,12 @@ class SpeakerController(ActorController):
 		self.stop_frequency = 0
 
 	def start_warning(self, warning_level):
+		print('starting warning')
 		if warning_level == WarningLevel.DANGEROUS_SITUATION_WARNING.value:
 			wiringpi.softToneCreate(GPIOPin.PIN_SOUND.value)
 			wiringpi.softToneWrite(GPIOPin.PIN_SOUND.value, self.frequenzy)
 
 	def stop_warning(self):
+		print('stopping warning')
 		wiringpi.softToneCreate(GPIOPin.PIN_SOUND.value)
 		wiringpi.softToneWrite(GPIOPin.PIN_SOUND.value, self.stop_frequency)

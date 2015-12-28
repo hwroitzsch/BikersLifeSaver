@@ -77,6 +77,8 @@ class CameraDataProcessor(SensorDataProcessor):
 			result_image = eroded_image
 
 			if any(255 in x for x in result_image):
+				print('found direction indicator')
 				return ProcessedCameraData(probability=100.0, result=True)
 			else:
+				print('no direction indicator found')
 				return ProcessedCameraData(probability=100.0, result=False)

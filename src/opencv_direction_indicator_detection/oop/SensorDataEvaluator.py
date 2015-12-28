@@ -10,6 +10,7 @@ class SensorDataEvaluator:
 		self.speaker_controller = SpeakerController()
 
 	def evaluate(self, processed_sensor_data):
+		print('evaluating sensor data')
 		# TODO:
 		# depending on where the data comes from,
 		# what time it it,
