@@ -9,5 +9,5 @@ class SensorAdapter(metaclass=ABCMeta):
 	"""
 
 	@abstractmethod
-	def get_data():
+	def get_data(self):
 		return

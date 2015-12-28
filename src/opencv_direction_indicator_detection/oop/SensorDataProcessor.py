@@ -9,5 +9,5 @@ class SensorDataProcessor(metaclass=ABCMeta):
 	"""
 
 	@abstractmethod
-	def process_data(sensor_data):
+	def process_data(self, sensor_data):
 		return

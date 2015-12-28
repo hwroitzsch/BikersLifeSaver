@@ -5,7 +5,7 @@ class SensorDataEvaluator:
 	def __init__(self):
 		pass
 
-	def evaluate(processed_sensor_data):
+	def evaluate(self, processed_sensor_data):
 		# TODO:
 		# depending on where the data comes from,
 		# what time it it,
