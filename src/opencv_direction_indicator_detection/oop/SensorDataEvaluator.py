@@ -34,7 +34,10 @@ class SensorDataEvaluator:
 
 	# TODO: use asyncio???
 	def inform_server(self):
-		datetime_diff = datetime.now() - self.last_inform_server_datetime
+		if self.last_inform_server_datetime is None:
+			datetime_diff = self.minimum_time_elapsed_between_requests + 1  # greater than minimum in any case
+		else:
+			datetime_diff = datetime.now() - self.last_inform_server_datetime
 
 		if datetime_diff.seconds >= 30:
 			example_longitude = '58.33444'
