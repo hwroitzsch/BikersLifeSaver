@@ -20,8 +20,10 @@ class CameraDataProcessor(SensorDataProcessor):
 
 		print('using OpenCV version:', opencv.__version__)
 
-		self.lower_blinker_hsv = np.uint8([80, 150, 220])
-		self.upper_blinker_hsv = np.uint8([100, 220, 255])
+		# self.lower_blinker_hsv = np.uint8([80, 150, 220])
+		# self.upper_blinker_hsv = np.uint8([100, 220, 255])
+		self.lower_blinker_hsv = np.uint8([260, 150, 220])  # 360° - 80°
+		self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
 
 
 	def create_kernel(self, rows=3, cols=3):
