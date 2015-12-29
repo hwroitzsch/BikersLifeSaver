@@ -26,5 +26,5 @@ class ImageFileWriter:
 				# else:
 				# 	print('image_data.shape is None')
 
-				opencv.imwrite(file_path, converted_image_data, (opencv.IMWRITE_PNG_COMPRESSION, 0))
+				opencv.imwrite(file_path, image_data, (opencv.IMWRITE_PNG_COMPRESSION, 0))
 				index += 2
