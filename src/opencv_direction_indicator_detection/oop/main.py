@@ -90,7 +90,7 @@ class BikerApp:
 
 
 def calculate_time_diff(t1, t2):
-	return (t2 - t1).microseconds / (1*10**6) + (d2-d1).seconds
+	return (t2 - t1).microseconds / (1*10**6) + (t2-t1).seconds
 
 
 def main():
