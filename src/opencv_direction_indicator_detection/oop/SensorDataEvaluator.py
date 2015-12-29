@@ -37,9 +37,9 @@ class SensorDataEvaluator:
 		if self.last_inform_server_datetime is None:
 			datetime_diff = self.minimum_time_elapsed_between_requests + 1  # greater than minimum in any case
 		else:
-			datetime_diff = datetime.now() - self.last_inform_server_datetime
+			datetime_diff = (datetime.now() - self.last_inform_server_datetime).seconds
 
-		if datetime_diff.seconds >= 30:
+		if datetime_diff >= 30:
 			example_longitude = '58.33444'
 			example_latitude = '19.72878'
 
@@ -54,6 +54,6 @@ class SensorDataEvaluator:
 				current_datetime
 			)
 
-			self.last_inform_server_datetime = current_datetime
+			self.last_inform_server_datetime = datetime.now()
 		else:
 			print('WARNING:', 'not informing server, because last request is less than', self.minimum_time_elapsed_between_requests, 'ago.')
