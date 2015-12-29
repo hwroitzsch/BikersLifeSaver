@@ -95,24 +95,20 @@ class CameraDataProcessor(SensorDataProcessor):
 			if config_development_mode:
 				print(self.processed_image_counter, 'images processed')
 
+			# TODO: candidate for asyncIO???
+			if config_development_mode:
+				original_image_file_path = 'test_image_' + str(self.processed_image_counter) + '.PNG'
+				hsv_image_file_path = 'test_image_hsv_' + str(self.processed_image_counter) + '.PNG'
+				processed_image_file_path = 'test_image_eroded_' + str(self.processed_image_counter) + '.PNG'
+
+				self.image_file_writer.write_images(
+					original_image_file_path, image,
+					hsv_image_file_path, hsv_image,
+					processed_image_file_path, result_image
+				)
+
 			if any(255 in x for x in result_image):
 				print('found direction indicator')
-
-				# TODO: candidate for asyncIO???
-				if config_development_mode:
-					original_image_file_path = 'test_image_' + str(self.processed_image_counter) + '.PNG'
-					hsv_image_file_path = 'test_image_hsv_' + str(self.processed_image_counter) + '.PNG'
-					processed_image_file_path = 'test_image_eroded_' + str(self.processed_image_counter) + '.PNG'
-
-					self.image_file_writer.write_images(
-						original_image_file_path, image,
-						hsv_image_file_path, hsv_image,
-						processed_image_file_path, result_image
-					)
-
-					print('wrote original image to', original_image_file_path)
-					print('wrote processed image to', processed_image_file_path)
-
 				return ProcessedCameraData(probability=100.0, result=True)
 			else:
 				print('no direction indicator found')
