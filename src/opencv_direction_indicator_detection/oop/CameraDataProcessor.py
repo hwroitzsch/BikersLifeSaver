@@ -4,6 +4,8 @@ import datetime
 import cv2 as opencv
 import numpy as np
 
+import config
+
 from SensorDataProcessor import SensorDataProcessor
 from ProcessedCameraData import ProcessedCameraData
 from ImageFileWriter import ImageFileWriter
@@ -85,7 +87,7 @@ class CameraDataProcessor(SensorDataProcessor):
 				print('found direction indicator')
 
 				# TODO: candidate for asyncIO???
-				if development_mode:
+				if config_development_mode:
 					self.image_file_writer.write_images(
 						'test_image_' + str(self.processed_image_counter) + '.PNG',
 						image,

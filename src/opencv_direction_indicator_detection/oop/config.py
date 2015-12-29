@@ -1,1 +1,1 @@
-development_mode = True
+config_development_mode = True
