@@ -46,7 +46,7 @@ class SensorDataEvaluator:
 
 			# create dictionary
 			current_timestamp = time()
-			current_datetime = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%dT%H:%M:%S')
+			current_datetime = datetime.fromtimestamp(current_timestamp).strftime('%Y-%m-%dT%H:%M:%S')
 			print('sending request with timestamp:', current_datetime)
 
 			self.rest_communicator.send_dangerous_traffic_situation_request(
