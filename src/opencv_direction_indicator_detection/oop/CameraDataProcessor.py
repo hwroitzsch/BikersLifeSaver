@@ -94,10 +94,12 @@ class CameraDataProcessor(SensorDataProcessor):
 				# TODO: candidate for asyncIO???
 				if config_development_mode:
 					original_image_file_path = 'test_image_' + str(self.processed_image_counter) + '.PNG'
+					hsv_image_file_path = 'test_image_hsv_' + str(self.processed_image_counter) + '.PNG'
 					processed_image_file_path = 'test_image_eroded_' + str(self.processed_image_counter) + '.PNG'
 
 					self.image_file_writer.write_images(
 						original_image_file_path, image,
+						hsv_image_file_path, hsv_image,
 						processed_image_file_path, result_image
 					)
 
