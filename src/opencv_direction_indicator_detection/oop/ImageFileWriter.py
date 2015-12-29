@@ -19,6 +19,6 @@ class ImageFileWriter:
 				file_path = os.path.join(image_directory, file_name)
 				print('writing image file to', file_path)
 
-				image = opencv.cvtColor(image_data, cv2.COLOR_RGB2BGR)  # images might need to be converted to be correctly written by opencv
+				image = opencv.cvtColor(image_data, opencv.COLOR_RGB2BGR)  # images might need to be converted to be correctly written by opencv
 				opencv.imwrite(file_path, image_data, (opencv.IMWRITE_PNG_COMPRESSION, 0))
 				index += 2
