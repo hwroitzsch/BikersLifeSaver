@@ -1,6 +1,7 @@
-__author__ = 'Hans-Werner Roitzsch'
+from abc import ABCMeta, abstractmethod, abstractproperty
 
-# TODO: is abstract base class, implementation is for example RESTCommunicator
+
+__author__ = 'Hans-Werner Roitzsch'
 
 class NetworkCommunicator(metaclass=ABCMeta):
 	"""super class for classes, which use any kind of network to communicate with the server"""
