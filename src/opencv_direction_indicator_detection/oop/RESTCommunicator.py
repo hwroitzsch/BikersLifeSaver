@@ -96,4 +96,4 @@ class RESTCommunicator(NetworkCommunicator):
 		response = requests.post(url, data=json.dumps(current_coordinates), headers=headers)
 
 		# print information about the received response
-		self.print_send_dangerous_situation_response_information(response, coordinates)
+		self.print_send_dangerous_situation_response_information(response, current_coordinates)
