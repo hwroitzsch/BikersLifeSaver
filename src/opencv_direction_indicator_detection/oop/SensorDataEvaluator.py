@@ -50,6 +50,6 @@ class SensorDataEvaluator:
 				current_datetime
 			)
 
-			self.last_inform_server_datetime = datetime.now()
+			self.last_inform_server_datetime = current_datetime
 		else:
 			print('WARNING:', 'not informing server, because last request is less than', self.minimum_time_elapsed_between_requests, 'ago.')
