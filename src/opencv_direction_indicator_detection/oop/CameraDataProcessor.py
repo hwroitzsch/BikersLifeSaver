@@ -1,6 +1,4 @@
-import time
 import sched
-import datetime
 import cv2 as opencv
 import numpy as np
 

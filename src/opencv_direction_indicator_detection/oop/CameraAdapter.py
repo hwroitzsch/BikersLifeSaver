@@ -35,6 +35,7 @@ class CameraAdapter(SensorAdapter):
 			self.camera.start_preview()
 			# self.camera.capture(stream, format='rgb')
 			self.camera.capture(stream, format='bgr')
+			# self.camera.capture(stream, format='bgr', use_video_port=True)
 
 			timestamp = int(round(time.time() * 1000))
 			return CameraData(stream.array, timestamp)

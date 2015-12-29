@@ -33,10 +33,28 @@ class BikerApp:
 		self.sensor_data_evaluator = SensorDataEvaluator()
 
 	def analyze_camera(self):
+		t1_total = datetime.now()
+
 		print('TIME:', datetime.now(), ': processing camera image ...')
+
+		t1_get_image = datetime.now()
 		camera_data = self.camera_adapter.get_data()
+		t2_get_image = datetime.now()
+
+		t1_process_image = datetime.now()
 		processed_camera_data = self.camera_data_processor.process_data(camera_data)
+		t2_process_image = datetime.now()
+
+		t1_evaluate_result = datetime.now()
 		self.sensor_data_evaluator.evaluate(processed_camera_data)
+		t2_evaluate_result = datetime.now()
+
+		t2_total = datetime.now()
+
+		print('TIME TOTAL: ', calculate_time_diff(t1_total, t2_total), 's', sep='')
+		print('TIME GET IMAGE: ', calculate_time_diff(t1_get_image, t2_get_image), 's', sep='')
+		print('TIME PROCESSING: ', calculate_time_diff(t1_process_image, t2_process_image), 's', sep='')
+		print('TIME EVALUATE: ', calculate_time_diff(t1_evaluate_result, t2_evaluate_result), 's', sep='')
 
 	def analyze_hazard_spots(self):
 		print('TIME:', datetime.now(), ': processing hazard spot data ...')
@@ -69,6 +87,10 @@ class BikerApp:
 
 		# for more details about the scheduler take a look at:
 		# https://docs.python.org/3/library/sched.html#sched.scheduler
+
+
+def calculate_time_diff(t1, t2):
+	return (t2 - t1).microseconds / (1*10**6) + (d2-d1).seconds
 
 
 def main():
