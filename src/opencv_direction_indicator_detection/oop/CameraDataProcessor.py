@@ -88,15 +88,23 @@ class CameraDataProcessor(SensorDataProcessor):
 
 				# TODO: candidate for asyncIO???
 				if config_development_mode:
+					original_image_file_path = 'test_image_' + str(self.processed_image_counter) + '.PNG'
+					processed_image_file_path = 'test_image_eroded_' + str(self.processed_image_counter) + '.PNG'
+
 					self.image_file_writer.write_images(
-						'test_image_' + str(self.processed_image_counter) + '.PNG',
-						image,
-						'test_image_eroded_' + str(self.processed_image_counter) + '.PNG',
-						result_image
+						original_image_file_path, image,
+						processed_image_file_path, result_image
 					)
+
+					print('wrote original image to', original_image_file_path)
+					print('wrote processed image to', processed_image_file_path)
+
 				return ProcessedCameraData(probability=100.0, result=True)
 			else:
 				print('no direction indicator found')
 				return ProcessedCameraData(probability=100.0, result=False)
 
 			self.processed_image_counter += 1
+
+			if config_development_mode:
+				print(self.processed_image_counter, 'images processed')
