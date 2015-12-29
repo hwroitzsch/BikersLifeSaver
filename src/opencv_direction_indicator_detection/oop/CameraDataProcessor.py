@@ -84,6 +84,8 @@ class CameraDataProcessor(SensorDataProcessor):
 			# set the result
 			result_image = eroded_image
 
+			self.processed_image_counter += 1
+
 			if any(255 in x for x in result_image):
 				print('found direction indicator')
 
@@ -104,8 +106,6 @@ class CameraDataProcessor(SensorDataProcessor):
 			else:
 				print('no direction indicator found')
 				return ProcessedCameraData(probability=100.0, result=False)
-
-			self.processed_image_counter += 1
 
 			if config_development_mode:
 				print(self.processed_image_counter, 'images processed')
