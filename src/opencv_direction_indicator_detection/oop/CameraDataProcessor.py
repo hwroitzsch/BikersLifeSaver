@@ -51,7 +51,8 @@ class CameraDataProcessor(SensorDataProcessor):
 			mean_filtered = opencv.filter2D(image, -1, kernel)
 
 			# convert to HSV image
-			hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_RGB2HSV)
+			# hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_RGB2HSV)
+			hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_BGR2HSV)
 
 			# HSV color segmentation
 			mask_image = opencv.inRange(hsv_image, self.lower_blinker_hsv, self.upper_blinker_hsv)  # select only the pixels with HSV in the given range

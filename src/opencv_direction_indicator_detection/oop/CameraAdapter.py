@@ -33,7 +33,8 @@ class CameraAdapter(SensorAdapter):
 
 		with picamera.array.PiRGBArray(self.camera) as stream:
 			self.camera.start_preview()
-			self.camera.capture(stream, format='rgb')
+			# self.camera.capture(stream, format='rgb')
+			self.camera.capture(stream, format='bgr')
 
 			timestamp = int(round(time.time() * 1000))
 			return CameraData(stream.array, timestamp)
