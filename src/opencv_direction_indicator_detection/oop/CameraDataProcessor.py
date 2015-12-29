@@ -27,8 +27,8 @@ class CameraDataProcessor(SensorDataProcessor):
 		self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
 
 
-		self.lower_blinker_hsv = np.uint8([180, 150, 220])  # 360° - 80°
-		self.upper_blinker_hsv = np.uint8([190, 220, 255])  # 360° - 100°
+		# self.lower_blinker_hsv = np.uint8([180, 150, 220])  # 360° - 80°
+		# self.upper_blinker_hsv = np.uint8([190, 220, 255])  # 360° - 100°
 
 
 	def create_kernel(self, rows=3, cols=3):
