@@ -63,17 +63,19 @@ class RESTCommunicator(NetworkCommunicator):
 		print(json.dumps(coordinates))
 
 		# check whether the request was handled successfully
-		if response.status_code == requests.codes.ok:
-			print('RESPONSE:OK')
-		else:
-			print('WARNING: request not handled successfully')
-
-		print('The status code is:', response.status_code)
+		# if response.status_code == requests.codes.ok:
+		# 	print('RESPONSE:OK')
+		# else:
+		# 	print('WARNING: request not handled successfully')
+		#
+		# print('The status code is:', response.status_code)
 
 		if response.status_code == 204:
 			print('(Position has been saved. The response is without a message-body.)')
 		elif response.status_code == 201:
 			print('(Position has been saved. The request has been fulfilled.)')
+		else:
+			print('WARNING: request not handled successfully')
 
 	# TODO: use asyncio ???
 	def send_dangerous_traffic_situation_request(self, latitude, longitude, current_datetime):
