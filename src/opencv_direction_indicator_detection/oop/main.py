@@ -2,8 +2,6 @@ import time
 import sched
 from datetime import datetime
 
-import config
-
 import wiringpi2 as wiringpi
 import picamera
 

@@ -4,7 +4,7 @@ import datetime
 import cv2 as opencv
 import numpy as np
 
-import config
+from config import *
 
 from SensorDataProcessor import SensorDataProcessor
 from ProcessedCameraData import ProcessedCameraData
