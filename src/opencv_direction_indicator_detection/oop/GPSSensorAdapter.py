@@ -2,10 +2,7 @@ __author__ = 'Hans-Werner Roitzsch'
 __date__ = '2015-12-29'
 
 
-import threading
-
-
-class GPSMouseAdapter(SensorAdapter):
+class GPSSensorAdapter(SensorAdapter):
 	def __init__(self):
 		self.last_values = {}
 		self.gpsc = GPSController()
@@ -35,5 +32,5 @@ class GPSMouseAdapter(SensorAdapter):
 		self.last_values['mode'], self.gpsc.fix.mode
 
 		self.last_values['sats'], self.gpsc.satellites
-		
+
 		return self.last_values
