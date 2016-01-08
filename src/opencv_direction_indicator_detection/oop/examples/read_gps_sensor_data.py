@@ -1,4 +1,4 @@
-import gps as gps3
+import gps.gps as gps3
 from gps import WATCH_ENABLE, WATCH_NEWSTYLE
 # from gps import gps as gps3
 # from gps import WATCH_ENABLE, WATCH_NEWSTYLE
