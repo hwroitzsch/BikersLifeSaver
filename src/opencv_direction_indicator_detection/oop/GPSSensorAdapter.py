@@ -30,14 +30,14 @@ class GPSSensorAdapter(SensorAdapter):
 		self.last_values['epv'] = self.gpsc.fix.epv
 		self.last_values['ept'] = self.gpsc.gpsd.fix.ept
 
-		self.last_values['speed'], self.gpsc.fix.speed
+		self.last_values['speed'] = self.gpsc.fix.speed
 
-		self.last_values['climb'], self.gpsc.fix.climb
+		self.last_values['climb'] = self.gpsc.fix.climb
 
-		self.last_values['track'], self.gpsc.fix.track
+		self.last_values['track'] = self.gpsc.fix.track
 
-		self.last_values['mode'], self.gpsc.fix.mode
+		self.last_values['mode'] = self.gpsc.fix.mode
 
-		self.last_values['sats'], self.gpsc.satellites
+		self.last_values['sats'] = self.gpsc.satellites
 
 		return self.last_values
