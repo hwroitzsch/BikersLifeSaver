@@ -1,8 +1,8 @@
-from gps import gps
+import gps
 
 # Listen on port 2947 (gpsd) of localhost
-session = gps.gps("localhost", "2947")
-session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
+session = gps("localhost", "2947")
+session.stream(WATCH_ENABLE | WATCH_NEWSTYLE)
 
 while True:
 	try:
