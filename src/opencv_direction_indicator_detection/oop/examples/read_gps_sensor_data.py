@@ -12,7 +12,7 @@ while True:
 		# print report
 		if report['class'] == 'TPV':
 			if hasattr(report, 'time'):
-				print report.time
+				print(report.time)
 
 	except KeyError:
 		pass
@@ -20,4 +20,4 @@ while True:
 		quit()
 	except StopIteration:
 		session = None
-		print "GPSD has terminated"
+		print("GPSD has terminated")
