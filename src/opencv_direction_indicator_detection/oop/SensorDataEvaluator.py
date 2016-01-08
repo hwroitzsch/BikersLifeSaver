@@ -4,6 +4,7 @@ from LEDController import LEDController
 from SpeakerController import SpeakerController
 from WarningLevel import WarningLevel
 from RESTCommunicator import RESTCommunicator
+from GPSSensorAdapter import GPSSensorAdapter
 
 from datetime import datetime
 from time import time
@@ -13,6 +14,7 @@ class SensorDataEvaluator:
 		self.led_controller = LEDController()
 		self.speaker_controller = SpeakerController()
 		self.rest_communicator = RESTCommunicator()
+		self.gps_sensor_adapter = GPSSensorAdapter()
 
 		self.minimum_time_elapsed_between_requests = 30  # 30s should pass before sending another request
 		self.last_inform_server_datetime = None
@@ -46,15 +48,18 @@ class SensorDataEvaluator:
 			example_latitude = '19.72878'
 
 			# create dictionary
-			current_timestamp = time()
-			current_datetime = datetime.fromtimestamp(current_timestamp).strftime('%Y-%m-%dT%H:%M:%S')
-			print('sending request with timestamp:', current_datetime)
+			# current_timestamp = time()
+			# current_datetime = datetime.fromtimestamp(current_timestamp).strftime('%Y-%m-%dT%H:%M:%S')
+			# print('sending request with timestamp:', current_datetime)
 
-			self.rest_communicator.send_dangerous_traffic_situation_request(
-				example_longitude,
-				example_latitude,
-				current_datetime
-			)
+			current_gps_sensor_data = self.gps_sensor_adapter.get_data_from_controller()
+			longitude = current_gps_sensor_data['longitude']
+			latitude = current_gps_sensor_data['latitude']
+			datetime = datetime.fromtimestamp(current_gps_sensor_data['time_utc']).strftime('%Y-%m-%dT%H:%M:%SZ')
+			print('sending request with timestamp:', timestamp)
+
+
+			self.rest_communicator.send_dangerous_traffic_situation_request(longitude, latitude, datetime)
 
 			self.last_inform_server_datetime = datetime.now()
 		else:
