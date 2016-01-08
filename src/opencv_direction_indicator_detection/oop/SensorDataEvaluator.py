@@ -52,7 +52,7 @@ class SensorDataEvaluator:
 			# current_datetime = datetime.fromtimestamp(current_timestamp).strftime('%Y-%m-%dT%H:%M:%S')
 			# print('sending request with timestamp:', current_datetime)
 
-			current_gps_sensor_data = self.gps_sensor_adapter.get_data_from_controller()
+			current_gps_sensor_data = self.gps_sensor_adapter.get_data()
 			longitude = current_gps_sensor_data['longitude']
 			latitude = current_gps_sensor_data['latitude']
 			datetime = datetime.fromtimestamp(current_gps_sensor_data['time_utc']).strftime('%Y-%m-%dT%H:%M:%SZ')

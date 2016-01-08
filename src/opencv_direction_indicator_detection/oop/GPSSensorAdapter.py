@@ -12,8 +12,7 @@ class GPSSensorAdapter(SensorAdapter):
 		except:
 			print('ERROR:', 'Could not start GPSController.')
 
-
-	def get_data_from_controller(self):
+	def get_data(self):
 		self.last_values['latitude'] = self.gpsc.fix.latitude
 		self.last_values['longitude'] = self.gpsc.fix.longitude
 
