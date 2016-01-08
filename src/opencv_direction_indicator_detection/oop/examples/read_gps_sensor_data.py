@@ -1,4 +1,4 @@
-import gps
+from gps import gps
 
 # Listen on port 2947 (gpsd) of localhost
 session = gps.gps("localhost", "2947")
