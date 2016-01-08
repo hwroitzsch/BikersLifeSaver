@@ -1,11 +1,17 @@
 import gps as gps3
+from gps import WATCH_ENABLE, WATCH_NEWSTYLE
 # from gps import gps as gps3
 # from gps import WATCH_ENABLE, WATCH_NEWSTYLE
 
 # Listen on port 2947 (gpsd) of localhost
+print('gps3:')
 print(dir(gps3))
+
+print('gps3.gps:')
+print(dir(gps3.gps))
+
 session = gps3.gps("localhost", "2947")
-session.stream(gps3.WATCH_ENABLE | gps3.WATCH_NEWSTYLE)
+session.stream(WATCH_ENABLE | WATCH_NEWSTYLE)
 
 while True:
 	try:
@@ -15,7 +21,7 @@ while True:
 		# print report
 		if report['class'] == 'TPV':
 			if hasattr(report, 'time'):
-				print(report.time)
+				print('TIME:', report.time)
 
 	except KeyError:
 		pass
