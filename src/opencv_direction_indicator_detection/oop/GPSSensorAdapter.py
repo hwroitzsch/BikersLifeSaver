@@ -2,6 +2,9 @@ __author__ = 'Hans-Werner Roitzsch'
 __date__ = '2015-12-29'
 
 
+from SensorAdapter import SensorAdapter
+
+
 class GPSSensorAdapter(SensorAdapter):
 	
 	def __init__(self):
