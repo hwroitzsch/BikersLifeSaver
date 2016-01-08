@@ -3,11 +3,15 @@ __date__ = '2015-12-29'
 
 
 class GPSSensorAdapter(SensorAdapter):
+	
 	def __init__(self):
 		self.last_values = {}
 		self.gpsc = GPSController()
 		try:
 			self.gpsc.start()
+		except:
+			print('ERROR:', 'Could not start GPSController.')
+
 
 	def get_data_from_controller(self):
 		self.last_values['latitude'] = self.gpsc.fix.latitude
