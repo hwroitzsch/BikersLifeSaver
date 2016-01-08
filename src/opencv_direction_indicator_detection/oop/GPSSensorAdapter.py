@@ -3,6 +3,7 @@ __date__ = '2015-12-29'
 
 
 from SensorAdapter import SensorAdapter
+from GPSController import GPSController
 
 
 class GPSSensorAdapter(SensorAdapter):
