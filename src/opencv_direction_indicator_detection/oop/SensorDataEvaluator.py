@@ -48,18 +48,18 @@ class SensorDataEvaluator:
 			example_latitude = '19.72878'
 
 			# create dictionary
-			# current_timestamp = time()
-			# current_datetime = datetime.fromtimestamp(current_timestamp).strftime('%Y-%m-%dT%H:%M:%S')
-			# print('sending request with timestamp:', current_datetime)
+			current_timestamp = time()
+			current_datetime = datetime.fromtimestamp(current_timestamp).strftime('%Y-%m-%dT%H:%M:%S')
+			print('sending request with timestamp:', current_datetime)
 
 			current_gps_sensor_data = self.gps_sensor_adapter.get_data()
 			longitude = current_gps_sensor_data['longitude']
 			latitude = current_gps_sensor_data['latitude']
-			datetime = datetime.fromtimestamp(current_gps_sensor_data['time_utc']).strftime('%Y-%m-%dT%H:%M:%SZ')
-			print('sending request with timestamp:', timestamp)
+			# gps_datetime = datetime.fromtimestamp(current_gps_sensor_data['time_utc']).strftime('%Y-%m-%dT%H:%M:%SZ')
+			# print('sending request with timestamp:', timestamp)
 
 
-			self.rest_communicator.send_dangerous_traffic_situation_request(longitude, latitude, datetime)
+			self.rest_communicator.send_dangerous_traffic_situation_request(longitude, latitude, current_datetime)
 
 			self.last_inform_server_datetime = datetime.now()
 		else:
