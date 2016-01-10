@@ -23,7 +23,9 @@ class LEDController(ActorController):
 			self.set_led_red()
 
 	def stop_warning(self):
-		self.switch_off_leds()
+		wiringpi.digitalWrite(GPIOPin.PIN_RGB_RED.value, GPIOPin.STATUS_LOW.value)
+		wiringpi.digitalWrite(GPIOPin.PIN_RGB_GREEN.value, GPIOPin.STATUS_LOW.value)
+		wiringpi.digitalWrite(GPIOPin.PIN_RGB_BLUE.value, GPIOPin.STATUS_LOW.value)
 
 	def set_led_red(self):
 		self.switch_off_leds()
@@ -48,6 +50,7 @@ class LEDController(ActorController):
 		wiringpi.digitalWrite(GPIOPin.PIN_RGB_RED.value, GPIOPin.STATUS_LOW.value)
 		wiringpi.digitalWrite(GPIOPin.PIN_RGB_GREEN.value, GPIOPin.STATUS_LOW.value)
 		wiringpi.digitalWrite(GPIOPin.PIN_RGB_BLUE.value, GPIOPin.STATUS_LOW.value)
+		wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_LOW.value)
 
 	def emit_ready_signal(self):
 		for run_count in range(3):
@@ -58,9 +61,6 @@ class LEDController(ActorController):
 
 	def emit_running_signal(self):
 		wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_HIGH.value)
-
-	def emit_stopped_signal(self):
-		wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_LOW.value)
 
 # def switch_led_on():
 # 	GPIO.output(LED_GPIO_PIN_NUMBER, True)  # switch it on!

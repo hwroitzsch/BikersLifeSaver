@@ -3,6 +3,8 @@ import json
 from time import time
 from datetime import datetime
 
+import sys
+
 from network.NetworkCommunicator import NetworkCommunicator
 from writer.AccidentHotspotsFileWriter import AccidentHotspotsFileWriter
 
@@ -62,14 +64,6 @@ class RESTCommunicator(NetworkCommunicator):
 		print('created JSON:')
 		print(json.dumps(coordinates))
 
-		# check whether the request was handled successfully
-		# if response.status_code == requests.codes.ok:
-		# 	print('RESPONSE:OK')
-		# else:
-		# 	print('WARNING: request not handled successfully')
-		#
-		# print('The status code is:', response.status_code)
-
 		if response.status_code == 204:
 			print('(Position has been saved. The response is without a message-body.)')
 		elif response.status_code == 201:
@@ -93,9 +87,12 @@ class RESTCommunicator(NetworkCommunicator):
 		# url = 'http://85.214.69.226:8080/WebServiceBLS/webresources/receivedcoordinates'
 		url = self.server_communication_protocol + '://' + self.server_ip_address + ':' + str(self.server_port) + '/WebServiceBLS/webresources/receivedcoordinates'
 
-		# send request to the server to persist the current geo location
-		# hold the response in a variable
-		response = requests.post(url, data=json.dumps(current_coordinates), headers=headers)
+		try:
+			# send request to the server to persist the current geo location
+			# hold the response in a variable
+			response = requests.post(url, data=json.dumps(current_coordinates), headers=headers)
+			# print information about the received response
+			self.print_send_dangerous_situation_response_information(response, current_coordinates)
+		except:
+			print('Had issues connecting to central server to send information about dangerous situations.')
 
-		# print information about the received response
-		self.print_send_dangerous_situation_response_information(response, current_coordinates)

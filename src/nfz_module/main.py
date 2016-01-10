@@ -2,6 +2,8 @@ import time
 import sched
 from datetime import datetime
 
+import sys
+
 import wiringpi2 as wiringpi
 import picamera
 
@@ -12,6 +14,7 @@ from model.PinMode import PinMode
 
 # import classes
 from adapter.CameraAdapter import CameraAdapter
+from adapter.ImageAdapter import ImageAdapter
 from processor.CameraDataProcessor import CameraDataProcessor
 from controller.LEDController import LEDController
 from controller.SpeakerController import SpeakerController
@@ -20,6 +23,7 @@ from evaluator.SensorDataEvaluator import SensorDataEvaluator
 # import helpers
 from helper.TimeFunction import TimeFunction
 
+import config
 
 __author__ = 'Hans-Werner Roitzsch'
 
@@ -28,7 +32,7 @@ class BikerApp:
 	def __init__(self):
 		self.initialize_hardware()
 
-		self.camera_adapter = CameraAdapter()
+		self.camera_adapter = CameraAdapter()  # EDIT to get images from camera
 		self.camera_data_processor = CameraDataProcessor()
 		self.led_controller = LEDController()
 		self.speaker_controller = SpeakerController()
@@ -43,7 +47,8 @@ class BikerApp:
 	def analyze_camera(self):
 		t1_total = datetime.now()
 
-		print('TIME:', datetime.now(), ': processing camera image ...')
+		if config.development_mode:
+			print('TIME:', datetime.now(), ': processing camera image ...')
 
 		t1_get_image = datetime.now()
 		camera_data = self.camera_adapter.get_data()
@@ -59,10 +64,17 @@ class BikerApp:
 
 		t2_total = datetime.now()
 
-		print('TIME TOTAL: ', TimeFunction.calculate_time_diff(t1_total, t2_total), 's', sep='')
-		print('TIME GET IMAGE: ', TimeFunction.calculate_time_diff(t1_get_image, t2_get_image), 's', sep='')
-		print('TIME PROCESSING: ', TimeFunction.calculate_time_diff(t1_process_image, t2_process_image), 's', sep='')
-		print('TIME EVALUATE: ', TimeFunction.calculate_time_diff(t1_evaluate_result, t2_evaluate_result), 's', sep='')
+		if config.development_mode:
+			time_total = TimeFunction.calculate_time_diff(t1_total, t2_total)
+			print('TIME TOTAL: ', time_total, 's', sep='')
+			print('TIME GET IMAGE: ', TimeFunction.calculate_time_diff(t1_get_image, t2_get_image), 's', sep='')
+			print('TIME PROCESSING: ', TimeFunction.calculate_time_diff(t1_process_image, t2_process_image), 's', sep='')
+			print('TIME EVALUATE: ', TimeFunction.calculate_time_diff(t1_evaluate_result, t2_evaluate_result), 's', sep='')
+			self.total_time_average = (
+				(time_total / (self.loop_iterations + 1)) +  # new value and its influence on the average
+				(self.total_time_average * (self.loop_iterations / (self.loop_iterations + 1)))  # old value and its influence on total average
+			)
+			print('=== TOTAL TIME AVERAGE:', self.total_time_average, '===')
 
 	def initialize_hardware(self):
 		wiringpi.wiringPiSetup()
@@ -81,11 +93,15 @@ class BikerApp:
 				self.analyze_camera()
 				self.loop_iterations += 1
 			except KeyboardInterrupt as interrupt:
-				self.led_controller.stop_warning()
-				self.led_controller.emit_stopped_signal()
+				self.led_controller.switch_off_leds()
+				self.speaker_controller.stop_warning()
+				print('Program finished.')
 				break
-
-		print('Program finished.')
+			except:
+				self.led_controller.switch_off_leds()
+				self.speaker_controller.stop_warning()
+				raise
+				sys.exit()
 
 def main():
 	app = BikerApp()
