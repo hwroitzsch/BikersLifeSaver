@@ -8,7 +8,7 @@ import cv2 as opencv
 class ImageReader:
 	def __init__(self):
 		self.images_directory = 'captured_images'
-		self.images_file_paths = self.get_file_names(self.images_directory)
+		self.images_file_paths = self.get_file_names()
 		self.current_index = 0
 
 	def get_file_names():
