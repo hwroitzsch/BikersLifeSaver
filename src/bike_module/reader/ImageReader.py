@@ -4,6 +4,7 @@ import os
 import numpy as np
 import cv2 as opencv
 
+import config
 
 class ImageReader:
 	def __init__(self):
@@ -26,7 +27,9 @@ class ImageReader:
 				any(ending.lower() in name.lower() for ending in allowed_formats)
 			)
 		]
-		print('ALL FILES:', onlyfiles)
+		
+		if config.development_mode:
+			print('ALL FILES:', onlyfiles)
 
 		for file_name in onlyfiles:
 			if 'hsv' in file_name:
