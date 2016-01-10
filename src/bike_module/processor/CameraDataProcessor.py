@@ -37,7 +37,8 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			### original values rgb
 			self.lower_blinker_hsv = np.uint8([80, 150, 220])
-			self.upper_blinker_hsv = np.uint8([100, 220, 255])
+			#self.upper_blinker_hsv = np.uint8([100, 220, 255])
+			self.upper_blinker_hsv = np.uint8([100, 230, 255])
 
 		### other values
 		# self.lower_blinker_hsv = np.uint8([180, 150, 220])  # 360° - 80°
