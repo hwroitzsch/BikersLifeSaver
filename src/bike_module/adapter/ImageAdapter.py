@@ -15,4 +15,5 @@ class ImageAdapter(SensorAdapter):
 		self.image_reader = ImageReader()
 
 	def get_data(self):
-		return self.image_reader.read_next()
+		timestamp = int(round(time.time() * 1000))
+		return CameraData(self.image_reader.read_next(), timestamp)

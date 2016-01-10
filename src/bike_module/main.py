@@ -12,6 +12,7 @@ from model.PinMode import PinMode
 
 # import classes
 from adapter.CameraAdapter import CameraAdapter
+from adapter.ImageAdapter import ImageAdapter
 from processor.CameraDataProcessor import CameraDataProcessor
 from controller.LEDController import LEDController
 from controller.SpeakerController import SpeakerController
