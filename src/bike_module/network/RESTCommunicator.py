@@ -93,9 +93,12 @@ class RESTCommunicator(NetworkCommunicator):
 		# url = 'http://85.214.69.226:8080/WebServiceBLS/webresources/receivedcoordinates'
 		url = self.server_communication_protocol + '://' + self.server_ip_address + ':' + str(self.server_port) + '/WebServiceBLS/webresources/receivedcoordinates'
 
-		# send request to the server to persist the current geo location
-		# hold the response in a variable
-		response = requests.post(url, data=json.dumps(current_coordinates), headers=headers)
+		try:
+			# send request to the server to persist the current geo location
+			# hold the response in a variable
+			response = requests.post(url, data=json.dumps(current_coordinates), headers=headers)
+		except:
+			print('Had issues connecting to central server to send information about dangerous situations.')
 
 		# print information about the received response
 		self.print_send_dangerous_situation_response_information(response, current_coordinates)
