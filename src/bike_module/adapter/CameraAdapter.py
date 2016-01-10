@@ -27,7 +27,7 @@ class CameraAdapter(SensorAdapter):
 			timestamp = int(round(time.time() * 1000))
 
 			parts = np.split(stream.array, 6)
+			# use only the 3 vertical 1/6 of the picture, which are the 3rd, 4th and 5th parts
 			image = np.concatenate((parts[2], parts[3], parts[4]), axis=0)
-			# image = np.split(stream.array, 2)[1]  # only use the lower half of the image
 
 			return CameraData(image, timestamp)
