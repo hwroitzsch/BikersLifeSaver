@@ -3,7 +3,7 @@ __author__ = 'Hans-Werner Roitzsch'
 
 from scipy import ndimage
 from datetime import datetime
-from TimeFunction import TimeFunction
+from helper.TimeFunction import TimeFunction
 
 
 class LabelCounting:
