@@ -143,12 +143,12 @@ class CameraDataProcessor(SensorDataProcessor):
 				processed_image_file_path = str(self.processed_image_counter) + '_test_image_eroded' + '.PNG'
 
 				self.image_file_writer.write_images(
-					original_image_file_path, image,
-					mean_filtered_image_path, mean_filtered,
-					hsv_image_file_path, hsv_image,
-					mask_image_file_path, mask_image,
-					closing_image_file_path, closing_image,
-					eroded_image_file_path, eroded_image,
+					# original_image_file_path, image,
+					# mean_filtered_image_path, mean_filtered,
+					# hsv_image_file_path, hsv_image,
+					# mask_image_file_path, mask_image,
+					# closing_image_file_path, closing_image,
+					# eroded_image_file_path, eroded_image,
 					processed_image_file_path, result_image
 				)
 
