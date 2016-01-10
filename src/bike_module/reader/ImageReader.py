@@ -40,6 +40,7 @@ class ImageReader:
 	def read_next(self):
 		"""This method reads the next image from the image directory."""
 		image_file_path = self.images_file_paths[self.current_index % len(self.images_file_paths)]
+		image_file_path = '/root/ghisallo_venv/src/bike_module/captured_images/215_test_image_hsv.PNG'
 		print('NOW WORKING WITH:', image_file_path)
 
 		if config.development_mode:
