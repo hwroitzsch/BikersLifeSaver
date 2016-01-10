@@ -85,7 +85,7 @@ class CameraDataProcessor(SensorDataProcessor):
 			# hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_BGR2HSV)
 			# t2_hsv_image = datetime.now()
 
-			hsv_image = camera_data
+			hsv_image = image
 
 			# HSV color segmentation
 			t1_mask = datetime.now()

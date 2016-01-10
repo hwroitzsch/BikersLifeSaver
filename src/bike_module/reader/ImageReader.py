@@ -45,7 +45,10 @@ class ImageReader:
 			print('Loading image from:', image_file_path)
 
 		image = opencv.imread(image_file_path, -1)
-		if config.development_mode: print('IMAGE TYPE:', type(image))
+
+		if config.development_mode:
+			print('IMAGE TYPE:', type(image))
+			
 		self.current_index += 1
 		return image
 
