@@ -1,0 +1,16 @@
+[
+	{
+		"latitude": 52.31959,
+		"nodeId": 4,
+		"numberofmembers": 5,
+		"timeStamp": "2015-11-17T22:00:07+01:00",
+		"longitude": 13.63091
+	},
+	{
+		"latitude": 52.31902,
+		"nodeId": 10,
+		"numberofmembers": 3,
+		"timeStamp": "2015-11-17T22:00:07+01:00",
+		"longitude": 13.63459
+	}
+]
