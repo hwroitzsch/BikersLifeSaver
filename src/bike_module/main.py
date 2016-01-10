@@ -71,7 +71,7 @@ class BikerApp:
 			print('TIME PROCESSING: ', TimeFunction.calculate_time_diff(t1_process_image, t2_process_image), 's', sep='')
 			print('TIME EVALUATE: ', TimeFunction.calculate_time_diff(t1_evaluate_result, t2_evaluate_result), 's', sep='')
 			self.total_time_average = (
-				(time_total / self.loop_iterations + 1) +  # new value and its influence on the average
+				(time_total / (self.loop_iterations + 1)) +  # new value and its influence on the average
 				(self.total_time_average * (self.loop_iterations / (self.loop_iterations + 1)))  # old value and its influence on total average
 			)
 			print('=== TOTAL TIME AVERAGE:', self.total_time_average, '===')
@@ -98,6 +98,8 @@ class BikerApp:
 				print('Program finished.')
 				break
 			except:
+				self.led_controller.switch_off_leds()
+				self.speaker_controller.stop_warning()
 				raise
 				sys.exit()
 
