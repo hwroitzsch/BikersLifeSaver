@@ -6,6 +6,7 @@ import numpy as np
 from model.CameraData import CameraData
 from adapter.SensorAdapter import SensorAdapter
 from config import capture_format
+from reader.ImageReader import ImageReader
 
 __author__ = 'Hans-Werner Roitzsch'
 
