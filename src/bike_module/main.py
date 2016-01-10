@@ -28,7 +28,7 @@ class BikerApp:
 	def __init__(self):
 		self.initialize_hardware()
 
-		self.camera_adapter = CameraAdapter()
+		self.camera_adapter = ImageAdapter()
 		self.camera_data_processor = CameraDataProcessor()
 		self.led_controller = LEDController()
 		self.speaker_controller = SpeakerController()
@@ -43,7 +43,8 @@ class BikerApp:
 	def analyze_camera(self):
 		t1_total = datetime.now()
 
-		print('TIME:', datetime.now(), ': processing camera image ...')
+		if config.development_mode:
+			print('TIME:', datetime.now(), ': processing camera image ...')
 
 		t1_get_image = datetime.now()
 		camera_data = self.camera_adapter.get_data()
@@ -59,10 +60,11 @@ class BikerApp:
 
 		t2_total = datetime.now()
 
-		print('TIME TOTAL: ', TimeFunction.calculate_time_diff(t1_total, t2_total), 's', sep='')
-		print('TIME GET IMAGE: ', TimeFunction.calculate_time_diff(t1_get_image, t2_get_image), 's', sep='')
-		print('TIME PROCESSING: ', TimeFunction.calculate_time_diff(t1_process_image, t2_process_image), 's', sep='')
-		print('TIME EVALUATE: ', TimeFunction.calculate_time_diff(t1_evaluate_result, t2_evaluate_result), 's', sep='')
+		if config.development_mode:
+			print('TIME TOTAL: ', TimeFunction.calculate_time_diff(t1_total, t2_total), 's', sep='')
+			print('TIME GET IMAGE: ', TimeFunction.calculate_time_diff(t1_get_image, t2_get_image), 's', sep='')
+			print('TIME PROCESSING: ', TimeFunction.calculate_time_diff(t1_process_image, t2_process_image), 's', sep='')
+			print('TIME EVALUATE: ', TimeFunction.calculate_time_diff(t1_evaluate_result, t2_evaluate_result), 's', sep='')
 
 	def initialize_hardware(self):
 		wiringpi.wiringPiSetup()

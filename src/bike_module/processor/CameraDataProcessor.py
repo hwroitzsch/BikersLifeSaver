@@ -22,9 +22,7 @@ class CameraDataProcessor(SensorDataProcessor):
 
 		print('using OpenCV version:', opencv.__version__)
 
-		### original values rgb
-		# self.lower_blinker_hsv = np.uint8([80, 150, 220])
-		# self.upper_blinker_hsv = np.uint8([100, 220, 255])
+		
 
 		if config.use_demo_thresholds:
 			print('Using demo HSV thresholds.')
@@ -33,9 +31,14 @@ class CameraDataProcessor(SensorDataProcessor):
 			self.lower_blinker_hsv = np.uint8([15, 75, 225])  # 360° - 80°
 			self.upper_blinker_hsv = np.uint8([30, 100, 245])  # 360° - 100°
 		else:
+			### original values bgr and switched in hsv position
 			print('Using real car HSV thresholds.')
-			self.lower_blinker_hsv = np.uint8([260, 150, 220])  # 360° - 80°
-			self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
+			# self.lower_blinker_hsv = np.uint8([260, 150, 220])  # 360° - 80°
+			# self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
+
+			### original values rgb
+			self.lower_blinker_hsv = np.uint8([80, 150, 220])
+			self.upper_blinker_hsv = np.uint8([100, 220, 255])
 
 		### other values
 		# self.lower_blinker_hsv = np.uint8([180, 150, 220])  # 360° - 80°
@@ -69,18 +72,20 @@ class CameraDataProcessor(SensorDataProcessor):
 			t1_mean_filtering = datetime.now()
 
 			# mean filter to reduce noise
-			kernel_width = 4
-			kernel_height = 4
-			kernel = np.ones((kernel_width, kernel_height), dtype=np.float32) / (kernel_width * kernel_height)
-
-			mean_filtered = opencv.filter2D(image, -1, kernel)
-			t2_mean_filtering = datetime.now()
-
+			# kernel_width = 4
+			# kernel_height = 4
+			# kernel = np.ones((kernel_width, kernel_height), dtype=np.float32) / (kernel_width * kernel_height)
+			# 
+			# mean_filtered = opencv.filter2D(image, -1, kernel)
+			# t2_mean_filtering = datetime.now()
+			# 
 			# convert to HSV image
 			# hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_RGB2HSV)
-			t1_hsv_image = datetime.now()
-			hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_BGR2HSV)
-			t2_hsv_image = datetime.now()
+			# t1_hsv_image = datetime.now()
+			# hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_BGR2HSV)
+			# t2_hsv_image = datetime.now()
+
+			hsv_image = camera_data
 
 			# HSV color segmentation
 			t1_mask = datetime.now()
