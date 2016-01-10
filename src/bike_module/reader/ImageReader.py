@@ -40,7 +40,8 @@ class ImageReader:
 	def read_next(self):
 		"""This method reads the next image from the image directory."""
 		image_file_path = self.images_file_paths[self.current_index % len(self.images_file_paths)]
-		
+		print('NOW WORKING WITH:', image_file_path)
+
 		if config.development_mode:
 			print('Loading image from:', image_file_path)
 
