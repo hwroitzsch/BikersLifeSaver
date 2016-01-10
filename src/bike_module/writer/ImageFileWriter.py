@@ -31,6 +31,6 @@ class ImageFileWriter:
 				# else:
 				# 	print('image_data.shape is None')
 
-				image_data = opencv.cvtColor(image_data, opencv.COLOR_RGB2BGR)
+				# image_data = opencv.cvtColor(image_data, opencv.COLOR_RGB2BGR)
 				opencv.imwrite(file_path, image_data, (opencv.IMWRITE_PNG_COMPRESSION, 0))
 				index += 2
