@@ -30,7 +30,7 @@ class BikerApp:
 	def __init__(self):
 		self.initialize_hardware()
 
-		self.camera_adapter = ImageAdapter()  # EDIT to get images from camera
+		self.camera_adapter = CameraAdapter()  # EDIT to get images from camera
 		self.camera_data_processor = CameraDataProcessor()
 		self.led_controller = LEDController()
 		self.speaker_controller = SpeakerController()
