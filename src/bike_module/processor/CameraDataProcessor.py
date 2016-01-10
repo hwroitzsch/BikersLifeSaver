@@ -92,7 +92,7 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			# closing to make segments compact
 			t1_closing = datetime.now()
-			kernel = self.create_kernel(rows=16, cols=16)
+			kernel = self.create_kernel(rows=20, cols=20)
 			closing_image = opencv.morphologyEx(mask_image, opencv.MORPH_CLOSE, kernel)
 			t2_closing = datetime.now()
 
@@ -107,7 +107,7 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			# erode to remove noise
 			t1_erode = datetime.now()
-			kernel = self.create_kernel(rows=2, cols=2)
+			kernel = self.create_kernel(rows=3, cols=3)
 			eroded_image = opencv.erode(bordered_image, kernel=kernel, iterations=2)
 
 			# remove border for bitwise AND operation with original image
