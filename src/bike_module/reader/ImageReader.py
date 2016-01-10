@@ -16,7 +16,7 @@ class ImageReader:
 		result = []
 
 		path = os.getcwd()
-		if image_directory != '':
+		if self.image_directory != '':
 			path = os.path.join(os.getcwd(), self.images_directory)
 
 		onlyfiles = [
