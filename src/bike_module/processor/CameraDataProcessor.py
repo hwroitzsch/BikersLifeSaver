@@ -67,6 +67,8 @@ class CameraDataProcessor(SensorDataProcessor):
 		return image[top:rows_and_cols[0] - bottom, left:rows_and_cols[1] - right]
 
 	def process_data(self, camera_data):
+		previous_labels_count = self.last_label_count
+
 		image = camera_data.data
 		if image.shape is not None:
 			t1_mean_filtering = datetime.now()
@@ -74,7 +76,7 @@ class CameraDataProcessor(SensorDataProcessor):
 			# mean filter to reduce noise
 			kernel_width = 4
 			kernel_height = 4
-			kernel = np.ones((kernel_width, kernel_height), dtype=np.float32) / (kernel_width * kernel_height)
+			kernel = np.ones((kernel_width, kernel_height)) / (kernel_width * kernel_height)
 			
 			mean_filtered = opencv.filter2D(image, -1, kernel)
 			t2_mean_filtering = datetime.now()
@@ -95,6 +97,11 @@ class CameraDataProcessor(SensorDataProcessor):
 			kernel = self.create_kernel(rows=20, cols=20)
 			closing_image = opencv.morphologyEx(mask_image, opencv.MORPH_CLOSE, kernel)
 			t2_closing = datetime.now()
+
+			# count labels
+			t1_label_counting = datetime.now()
+			self.last_label_count = self.label_counting.count_labels(eroded_image)
+			t2_label_counting = datetime.now()
 
 			# create border around the image to create "fair" conditions for each pixel in the closing and erode step
 			t1_bordering = datetime.now()
@@ -119,11 +126,6 @@ class CameraDataProcessor(SensorDataProcessor):
 				border_right
 			)
 			t2_erode = datetime.now()
-
-			# count labels
-			t1_label_counting = datetime.now()
-			self.last_label_count = self.label_counting.count_labels(eroded_image)
-			t2_label_counting = datetime.now()
 
 			# set the result
 			result_image = eroded_image
@@ -153,7 +155,7 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			t1_search = datetime.now()
 
-			if any(255 in x for x in result_image):
+			if any(255 in x for x in result_image) or self.last_label_count != previous_labels_count:
 				t2_search = datetime.now()
 
 				if config.development_mode:
