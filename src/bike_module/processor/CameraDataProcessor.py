@@ -12,6 +12,7 @@ from config import *
 from processor.SensorDataProcessor import SensorDataProcessor
 from model.ProcessedCameraData import ProcessedCameraData
 from writer.ImageFileWriter import ImageFileWriter
+from algorithm.LabelCounting import LabelCounting
 
 
 class CameraDataProcessor(SensorDataProcessor):
@@ -23,14 +24,13 @@ class CameraDataProcessor(SensorDataProcessor):
 
 		# self.lower_blinker_hsv = np.uint8([80, 150, 220])
 		# self.upper_blinker_hsv = np.uint8([100, 220, 255])
-
 		self.lower_blinker_hsv = np.uint8([260, 150, 220])  # 360° - 80°
 		self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
-
-
 		# self.lower_blinker_hsv = np.uint8([180, 150, 220])  # 360° - 80°
 		# self.upper_blinker_hsv = np.uint8([190, 220, 255])  # 360° - 100°
 
+		self.last_label_count = -1
+		self.label_counting = LabelCounting()
 
 	def create_kernel(self, rows=3, cols=3):
 		return np.ones((rows, cols), dtype=np.int)
@@ -122,7 +122,7 @@ class CameraDataProcessor(SensorDataProcessor):
 				)
 
 			t1_search = datetime.now()
-			
+
 			if any(255 in x for x in result_image):
 				t2_search = datetime.now()
 

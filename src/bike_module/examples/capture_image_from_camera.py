@@ -16,7 +16,7 @@ def main():
         with picamera.array.PiRGBArray(camera) as stream:
             camera.start_preview()
             # camera.capture(stream, format='bgr')
-            camera.capture(stream, format='rgb', use_video_port=True)
+            camera.capture(stream, format='bgr', use_video_port=True)
             # rgb_image = opencv.cvtColor(stream.array, opencv.COLOR_BGR2RGB)
             rgb_image = stream.array
             hsv_image = opencv.cvtColor(stream.array, opencv.COLOR_BGR2HSV)
