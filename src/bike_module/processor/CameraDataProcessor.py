@@ -72,20 +72,18 @@ class CameraDataProcessor(SensorDataProcessor):
 			t1_mean_filtering = datetime.now()
 
 			# mean filter to reduce noise
-			# kernel_width = 4
-			# kernel_height = 4
-			# kernel = np.ones((kernel_width, kernel_height), dtype=np.float32) / (kernel_width * kernel_height)
-			# 
-			# mean_filtered = opencv.filter2D(image, -1, kernel)
-			# t2_mean_filtering = datetime.now()
-			# 
+			kernel_width = 4
+			kernel_height = 4
+			kernel = np.ones((kernel_width, kernel_height), dtype=np.float32) / (kernel_width * kernel_height)
+			
+			mean_filtered = opencv.filter2D(image, -1, kernel)
+			t2_mean_filtering = datetime.now()
+			
 			# convert to HSV image
-			# hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_RGB2HSV)
-			# t1_hsv_image = datetime.now()
-			# hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_BGR2HSV)
-			# t2_hsv_image = datetime.now()
-
-			hsv_image = image
+			hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_RGB2HSV)
+			t1_hsv_image = datetime.now()
+			hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_BGR2HSV)
+			t2_hsv_image = datetime.now()
 
 			# HSV color segmentation
 			t1_mask = datetime.now()
