@@ -10,7 +10,7 @@ class ImageReader:
 		self.images_directory = 'captured_images'
 		self.images_file_paths = self.get_file_names()
 		self.current_index = 0
-		self.allowed_formats = ['jpg','jpeg','png']
+		self.allowed_formats = ['jpg', 'jpeg', 'png']
 
 	def get_file_names(self):
 		"""This method searches for file names of images of allowed formats in the given directory."""
