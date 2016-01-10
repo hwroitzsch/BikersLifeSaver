@@ -1,3 +1,5 @@
+__author__ = 'Hans-Werner Roitzsch'
+
 import time
 import picamera
 import picamera.array
@@ -8,7 +10,7 @@ from adapter.SensorAdapter import SensorAdapter
 from config import capture_format
 from reader.ImageReader import ImageReader
 
-__author__ = 'Hans-Werner Roitzsch'
+import config
 
 
 class ImageAdapter(SensorAdapter):
@@ -17,4 +19,9 @@ class ImageAdapter(SensorAdapter):
 
 	def get_data(self):
 		timestamp = int(round(time.time() * 1000))
+		image = self.image_reader.read_next()
+		
+		if config.development_mode:
+			print('IMAGE TYPE in ImageAdapter:', type(image))
+
 		return CameraData(self.image_reader.read_next(), timestamp)
