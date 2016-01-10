@@ -7,7 +7,7 @@ class ImageFileWriter:
 		pass
 
 	def write_images(self, *args):
-		image_directory = '/root/ghisallo_venv/src/opencv_direction_indicator_detection/oop/test_images/'
+		image_directory = '/root/ghisallo_venv/src/bike_module/captured_images/'
 		if len(args) % 2 != 0:
 			print('argument error: got not enough names for files to write.')
 		else:
