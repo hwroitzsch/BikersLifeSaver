@@ -55,8 +55,11 @@ class CameraDataProcessor(SensorDataProcessor):
 		image = camera_data.data
 		if image.shape is not None:
 			t1_mean_filtering = datetime.now()
+
 			# mean filter to reduce noise
-			kernel = np.ones((6, 6), dtype=np.float32) / 36
+			kernel_width = 4
+			kernel_height = 4
+			kernel = np.ones((kernel_width, kernel_height), dtype=np.float32) / (kernel_width * kernel_height)
 
 			mean_filtered = opencv.filter2D(image, -1, kernel)
 			t2_mean_filtering = datetime.now()
@@ -74,7 +77,7 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			# closing to make segments compact
 			t1_closing = datetime.now()
-			kernel = self.create_kernel(rows=40, cols=40)
+			kernel = self.create_kernel(rows=20, cols=20)
 			closing_image = opencv.morphologyEx(mask_image, opencv.MORPH_CLOSE, kernel)
 			t2_closing = datetime.now()
 
@@ -89,8 +92,8 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			# erode to remove noise
 			t1_erode = datetime.now()
-			kernel = self.create_kernel(rows=3, cols=3)
-			eroded_image = opencv.erode(bordered_image, kernel=kernel, iterations=3)
+			kernel = self.create_kernel(rows=2, cols=2)
+			eroded_image = opencv.erode(bordered_image, kernel=kernel, iterations=2)
 
 			# remove border for bitwise AND operation with original image
 			eroded_image = self.remove_border(
@@ -101,6 +104,11 @@ class CameraDataProcessor(SensorDataProcessor):
 				border_right
 			)
 			t2_erode = datetime.now()
+
+			# count labels
+			t1_label_counting = datetime.now()
+			self.last_label_count = self.label_counting.count_labels(eroded_image)
+			t2_label_counting = datetime.now()
 
 			# set the result
 			result_image = eroded_image
@@ -113,11 +121,13 @@ class CameraDataProcessor(SensorDataProcessor):
 			if config_development_mode:
 				original_image_file_path = str(self.processed_image_counter) + '_test_image' + '.PNG'
 				hsv_image_file_path = str(self.processed_image_counter) + '_test_image_hsv' + '.PNG'
+				mask_image_file_path = str(self.processed_image_counter) + '_test_image_mask' + '.PNG'
 				processed_image_file_path = str(self.processed_image_counter) + '_test_image_eroded' + '.PNG'
 
 				self.image_file_writer.write_images(
 					original_image_file_path, image,
 					hsv_image_file_path, hsv_image,
+					mask_image_file_path, mask_image,
 					processed_image_file_path, result_image
 				)
 
@@ -134,6 +144,7 @@ class CameraDataProcessor(SensorDataProcessor):
 					print('TIME CLOSING: ', calculate_time_diff(t1_closing, t2_closing), 's', sep='')
 					print('TIME BORDERING: ', calculate_time_diff(t1_bordering, t2_bordering), 's', sep='')
 					print('TIME ERODING: ', calculate_time_diff(t1_erode, t2_erode), 's', sep='')
+					print('TIME LABEL COUNTING: ', calculate_time_diff(t1_label_counting, t2_label_counting), 's', sep='')
 					print('TIME SEARCH FOR LABELS: ', calculate_time_diff(t1_search, t2_search), 's', sep='')
 
 					print('found direction indicator')
@@ -150,6 +161,7 @@ class CameraDataProcessor(SensorDataProcessor):
 					print('TIME CLOSING: ', calculate_time_diff(t1_closing, t2_closing), 's', sep='')
 					print('TIME BORDERING: ', calculate_time_diff(t1_bordering, t2_bordering), 's', sep='')
 					print('TIME ERODING: ', calculate_time_diff(t1_erode, t2_erode), 's', sep='')
+					print('TIME LABEL COUNTING: ', calculate_time_diff(t1_label_counting, t2_label_counting), 's', sep='')
 					print('TIME SEARCH FOR LABELS: ', calculate_time_diff(t1_search, t2_search), 's', sep='')
 
 					print('no direction indicator found')
