@@ -21,6 +21,7 @@ from evaluator.SensorDataEvaluator import SensorDataEvaluator
 # import helpers
 from helper.TimeFunction import TimeFunction
 
+import config
 
 __author__ = 'Hans-Werner Roitzsch'
 
