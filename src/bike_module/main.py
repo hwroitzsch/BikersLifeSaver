@@ -65,10 +65,16 @@ class BikerApp:
 		t2_total = datetime.now()
 
 		if config.development_mode:
-			print('TIME TOTAL: ', TimeFunction.calculate_time_diff(t1_total, t2_total), 's', sep='')
+			time_total = TimeFunction.calculate_time_diff(t1_total, t2_total)
+			print('TIME TOTAL: ', time_total, 's', sep='')
 			print('TIME GET IMAGE: ', TimeFunction.calculate_time_diff(t1_get_image, t2_get_image), 's', sep='')
 			print('TIME PROCESSING: ', TimeFunction.calculate_time_diff(t1_process_image, t2_process_image), 's', sep='')
 			print('TIME EVALUATE: ', TimeFunction.calculate_time_diff(t1_evaluate_result, t2_evaluate_result), 's', sep='')
+			self.total_time_average = (
+				(total_time / self.loop_iterations + 1) +  # new value and its influence on the average
+				(self.total_time_average * (self.loop_iterations / (self.loop_iterations + 1)))  # old value and its influence on total average
+			)
+			print('=== TOTAL TIME AVERAGE:', self.total_time_average, '===')
 
 	def initialize_hardware(self):
 		wiringpi.wiringPiSetup()
@@ -89,12 +95,11 @@ class BikerApp:
 			except KeyboardInterrupt as interrupt:
 				self.led_controller.switch_off_leds()
 				self.speaker_controller.stop_warning()
+				print('Program finished.')
 				break
 			except:
 				raise
 				sys.exit()
-
-		print('Program finished.')
 
 def main():
 	app = BikerApp()
