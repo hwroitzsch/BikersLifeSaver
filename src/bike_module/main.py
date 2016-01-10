@@ -81,6 +81,7 @@ class BikerApp:
 				self.analyze_camera()
 				self.loop_iterations += 1
 			except KeyboardInterrupt as interrupt:
+				self.led_controller.stop_warning()
 				self.led_controller.emit_stopped_signal()
 				break
 
