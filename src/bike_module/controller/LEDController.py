@@ -6,7 +6,7 @@ from model.PinMode import PinMode
 from model.WarningLevel import WarningLevel
 from controller.ActorController import ActorController
 
-from time import sleep
+import time
 
 __author__ = 'Hans-Werner Roitzsch'
 
