@@ -2,6 +2,8 @@ import time
 import sched
 from datetime import datetime
 
+import sys
+
 import wiringpi2 as wiringpi
 import picamera
 
@@ -88,6 +90,8 @@ class BikerApp:
 				self.led_controller.stop_warning()
 				self.led_controller.emit_stopped_signal()
 				break
+			except:
+				sys.exit()
 
 		print('Program finished.')
 

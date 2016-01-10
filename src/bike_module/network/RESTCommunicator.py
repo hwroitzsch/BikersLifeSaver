@@ -3,6 +3,8 @@ import json
 from time import time
 from datetime import datetime
 
+import sys
+
 from network.NetworkCommunicator import NetworkCommunicator
 from writer.AccidentHotspotsFileWriter import AccidentHotspotsFileWriter
 

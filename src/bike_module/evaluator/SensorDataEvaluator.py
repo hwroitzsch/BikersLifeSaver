@@ -9,6 +9,8 @@ from adapter.GPSSensorAdapter import GPSSensorAdapter
 from datetime import datetime
 from time import time
 
+import config
+
 class SensorDataEvaluator:
 	def __init__(self):
 		self.led_controller = LEDController()
@@ -44,13 +46,14 @@ class SensorDataEvaluator:
 			datetime_diff = (datetime.now() - self.last_inform_server_datetime).seconds
 
 		if datetime_diff >= 30:
-			example_longitude = '58.33444'
-			example_latitude = '19.72878'
+			# example_longitude = '58.33444'
+			# example_latitude = '19.72878'
 
 			# create dictionary
-			current_timestamp = time()
-			current_datetime = datetime.fromtimestamp(current_timestamp).strftime('%Y-%m-%dT%H:%M:%S')
-			print('sending request with timestamp:', current_datetime)
+			current_datetime = datetime.fromtimestamp(time()).strftime('%Y-%m-%dT%H:%M:%S')
+			
+			if config.development_mode:
+				print('sending request with timestamp:', current_datetime)
 
 			current_gps_sensor_data = self.gps_sensor_adapter.get_data()
 			longitude = current_gps_sensor_data['longitude']
