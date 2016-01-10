@@ -100,7 +100,7 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			# count labels
 			t1_label_counting = datetime.now()
-			self.last_label_count = self.label_counting.count_labels(eroded_image)
+			self.last_label_count = self.label_counting.count_labels(closing_image)
 			t2_label_counting = datetime.now()
 
 			# create border around the image to create "fair" conditions for each pixel in the closing and erode step
