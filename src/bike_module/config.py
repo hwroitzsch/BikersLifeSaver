@@ -1,4 +1,4 @@
-development_mode = True
+development_mode = False
 
 use_demo_thresholds = False
 
