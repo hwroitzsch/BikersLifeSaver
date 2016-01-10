@@ -7,7 +7,7 @@ import sched
 import cv2 as opencv
 import numpy as np
 
-from config import *
+import config
 
 from processor.SensorDataProcessor import SensorDataProcessor
 from model.ProcessedCameraData import ProcessedCameraData
@@ -22,10 +22,20 @@ class CameraDataProcessor(SensorDataProcessor):
 
 		print('using OpenCV version:', opencv.__version__)
 
+		### original values rgb
 		# self.lower_blinker_hsv = np.uint8([80, 150, 220])
 		# self.upper_blinker_hsv = np.uint8([100, 220, 255])
-		self.lower_blinker_hsv = np.uint8([260, 150, 220])  # 360° - 80°
-		self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
+
+		if config.use_demo_thresholds:
+			# diff: 20 70 35
+			# hsv in gimp: 53 31 99
+			self.lower_blinker_hsv = np.uint8([43, 20 220])  # 360° - 80°
+			self.upper_blinker_hsv = np.uint8([63, 40 255])  # 360° - 100°
+		else:
+			self.lower_blinker_hsv = np.uint8([260, 150, 220])  # 360° - 80°
+			self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
+
+		### other values
 		# self.lower_blinker_hsv = np.uint8([180, 150, 220])  # 360° - 80°
 		# self.upper_blinker_hsv = np.uint8([190, 220, 255])  # 360° - 100°
 
@@ -114,11 +124,11 @@ class CameraDataProcessor(SensorDataProcessor):
 			result_image = eroded_image
 
 			self.processed_image_counter += 1
-			if config_development_mode:
+			if config.development_mode:
 				print(self.processed_image_counter, 'images processed')
 
 			# TODO: candidate for asyncIO???
-			if config_development_mode:
+			if config.development_mode:
 				original_image_file_path = str(self.processed_image_counter) + '_test_image' + '.PNG'
 				mean_filtered_image_path = str(self.processed_image_counter) + '_test_image_mean_filtered' + '.PNG'
 				hsv_image_file_path = str(self.processed_image_counter) + '_test_image_hsv' + '.PNG'
@@ -142,7 +152,7 @@ class CameraDataProcessor(SensorDataProcessor):
 			if any(255 in x for x in result_image):
 				t2_search = datetime.now()
 
-				if config_development_mode:
+				if config.development_mode:
 					print('TIMINGS FOR PROCESSING:')
 					print('TIME MEAN FILTERING: ', calculate_time_diff(t1_mean_filtering, t2_mean_filtering), 's', sep='')
 					print('TIME HSV CONVERSION: ', calculate_time_diff(t1_hsv_image, t2_hsv_image), 's', sep='')
@@ -159,7 +169,7 @@ class CameraDataProcessor(SensorDataProcessor):
 			else:
 				t2_search = datetime.now()
 				
-				if config_development_mode:
+				if config.development_mode:
 					print('TIMINGS FOR PROCESSING:')
 					print('TIME MEAN FILTERING: ', calculate_time_diff(t1_mean_filtering, t2_mean_filtering), 's', sep='')
 					print('TIME HSV CONVERSION: ', calculate_time_diff(t1_hsv_image, t2_hsv_image), 's', sep='')
