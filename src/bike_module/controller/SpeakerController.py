@@ -28,7 +28,7 @@ class SpeakerController(ActorController):
 			wiringpi.softToneWrite(GPIOPin.PIN_SOUND.value, self.frequenzy)
 
 			# schedule stop warning
-			self.scheduler.enter(0, 1, self.stop_after_duration, argument=(2))
+			self.scheduler.enter(0, 1, self.stop_after_duration
 			self.scheduler.run(blocking=False)
 
 	def stop_warning(self):
@@ -38,6 +38,6 @@ class SpeakerController(ActorController):
 		wiringpi.softToneCreate(GPIOPin.PIN_SOUND.value)
 		wiringpi.softToneWrite(GPIOPin.PIN_SOUND.value, self.stop_frequency)
 
-	def stop_after_duration(self, duration):
-		time.sleep(duration)
+	def stop_after_duration(self):
+		time.sleep(2)
 		self.stop_warning()
