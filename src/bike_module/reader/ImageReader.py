@@ -29,7 +29,7 @@ class ImageReader:
 		]
 		
 		if config.development_mode:
-			print('ALL FILES:', onlyfiles)
+			#print('ALL FILES:', onlyfiles)
 
 		for file_name in onlyfiles:
 			if 'hsv' in file_name:
@@ -40,6 +40,7 @@ class ImageReader:
 	def read_next(self):
 		"""This method reads the next image from the image directory."""
 		image = opencv.imread(self.images_file_paths[self.current_index % len(self.images_file_paths)], -1)
+		if config.development_mode: print('IMAGE TYPE:', type(image))
 		self.current_index += 1
 		return image
 
