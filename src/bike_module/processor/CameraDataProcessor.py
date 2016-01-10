@@ -27,11 +27,13 @@ class CameraDataProcessor(SensorDataProcessor):
 		# self.upper_blinker_hsv = np.uint8([100, 220, 255])
 
 		if config.use_demo_thresholds:
+			print('Using demo HSV thresholds.')
 			# diff: 20 70 35
 			# hsv in gimp: 25 88 91
 			self.lower_blinker_hsv = np.uint8([15, 75, 225])  # 360° - 80°
 			self.upper_blinker_hsv = np.uint8([30, 100, 245])  # 360° - 100°
 		else:
+			print('Using real car HSV thresholds.')
 			self.lower_blinker_hsv = np.uint8([260, 150, 220])  # 360° - 80°
 			self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
 
@@ -87,7 +89,7 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			# closing to make segments compact
 			t1_closing = datetime.now()
-			kernel = self.create_kernel(rows=20, cols=20)
+			kernel = self.create_kernel(rows=16, cols=16)
 			closing_image = opencv.morphologyEx(mask_image, opencv.MORPH_CLOSE, kernel)
 			t2_closing = datetime.now()
 
