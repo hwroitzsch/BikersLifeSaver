@@ -129,26 +129,25 @@ class CameraDataProcessor(SensorDataProcessor):
 			result_image = eroded_image
 
 			self.processed_image_counter += 1
-			if config.development_mode:
-				print(self.processed_image_counter, 'images processed')
 
-			# TODO: candidate for asyncIO???
+			if config.development_mode: print(self.processed_image_counter, 'images processed')
+
 			if config.development_mode:
-				original_image_file_path = str(self.processed_image_counter) + '_test_image' + '.PNG'
-				mean_filtered_image_path = str(self.processed_image_counter) + '_test_image_mean_filtered' + '.PNG'
-				hsv_image_file_path = str(self.processed_image_counter) + '_test_image_hsv' + '.PNG'
-				mask_image_file_path = str(self.processed_image_counter) + '_test_image_mask' + '.PNG'
-				closing_image_file_path = str(self.processed_image_counter) + '_test_image_closing' + '.PNG'
-				eroded_image_file_path = str(self.processed_image_counter) + '_test_image_eroded' + '.PNG'
-				processed_image_file_path = str(self.processed_image_counter) + '_test_image_eroded' + '.PNG'
+				original_image_file_path = str(self.processed_image_counter) + '_step_0_test_image' + '.PNG'
+				mean_filtered_image_path = str(self.processed_image_counter) + '_step_1_test_image_mean_filtered' + '.PNG'
+				hsv_image_file_path = str(self.processed_image_counter) + '_step_2_test_image_hsv' + '.PNG'
+				mask_image_file_path = str(self.processed_image_counter) + '_step_3_test_image_mask' + '.PNG'
+				closing_image_file_path = str(self.processed_image_counter) + '_step_4_test_image_closing' + '.PNG'
+				eroded_image_file_path = str(self.processed_image_counter) + '_step_5_test_image_eroded' + '.PNG'
+				processed_image_file_path = str(self.processed_image_counter) + '_step_6_test_image_eroded' + '.PNG'
 
 				self.image_file_writer.write_images(
-					# original_image_file_path, image,
-					# mean_filtered_image_path, mean_filtered,
-					# hsv_image_file_path, hsv_image,
-					# mask_image_file_path, mask_image,
-					# closing_image_file_path, closing_image,
-					# eroded_image_file_path, eroded_image,
+					original_image_file_path, image,
+					mean_filtered_image_path, mean_filtered,
+					hsv_image_file_path, hsv_image,
+					mask_image_file_path, mask_image,
+					closing_image_file_path, closing_image,
+					eroded_image_file_path, eroded_image,
 					processed_image_file_path, result_image
 				)
 
