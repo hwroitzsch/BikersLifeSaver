@@ -29,7 +29,7 @@ class ImageReader:
 		]
 		
 		if config.development_mode:
-			#print('ALL FILES:', onlyfiles)
+			pass#print('ALL FILES:', onlyfiles)
 
 		for file_name in onlyfiles:
 			if 'hsv' in file_name:
