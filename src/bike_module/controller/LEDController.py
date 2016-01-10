@@ -47,6 +47,19 @@ class LEDController(ActorController):
 		wiringpi.digitalWrite(GPIOPin.PIN_RGB_GREEN.value, GPIOPin.STATUS_LOW.value)
 		wiringpi.digitalWrite(GPIOPin.PIN_RGB_BLUE.value, GPIOPin.STATUS_LOW.value)
 
+	def emit_ready_signal(self):
+		for run_count in range(3):
+			wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_LOW.value)
+			time.sleep(0.3)
+			wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_HIGH.value)
+			time.sleep(0.3)
+
+	def emit_running_signal(self):
+		wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_HIGH.value)
+
+	def emit_stopped_signal(self):
+		wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_LOW.value)
+
 # def switch_led_on():
 # 	GPIO.output(LED_GPIO_PIN_NUMBER, True)  # switch it on!
 # 	GPIO.cleanup()  # still necessary if I want to have the LED on?

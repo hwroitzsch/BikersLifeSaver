@@ -72,21 +72,16 @@ class BikerApp:
 		wiringpi.pinMode(GPIOPin.PIN_RGB_GREEN.value, PinMode.OUTPUT.value)
 		wiringpi.pinMode(GPIOPin.PIN_RGB_BLUE.value, PinMode.OUTPUT.value)
 
-	def emit_ready_signal(self):
-		for run_count in range(3):
-			wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_HIGH.value)
-			time.sleep(0.3)
-			wiringpi.digitalWrite(GPIOPin.PIN_STATUS_LED.value, GPIOPin.STATUS_LOW.value)
-			time.sleep(0.3)
-
 	def run(self):
-		self.emit_ready_signal()
+		self.led_controller.emit_running_signal()
+		self.led_controller.emit_ready_signal()
 
 		while True:
 			try:
 				self.analyze_camera()
 				self.loop_iterations += 1
 			except KeyboardInterrupt as interrupt:
+				self.led_controller.emit_stopped_signal()
 				break
 
 		print('Program finished.')
