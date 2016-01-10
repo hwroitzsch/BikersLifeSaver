@@ -83,8 +83,13 @@ class BikerApp:
 		self.emit_ready_signal()
 
 		while True:
-			self.analyze_camera()
-			self.loop_iterations += 1
+			try:
+				self.analyze_camera()
+				self.loop_iterations += 1
+			except KeyboardInterrupt as interrupt:
+				break
+
+		print('Program finished.')
 
 def main():
 	app = BikerApp()
