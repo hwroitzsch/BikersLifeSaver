@@ -88,7 +88,7 @@ class BikerApp:
 				self.loop_iterations += 1
 			except KeyboardInterrupt as interrupt:
 				self.led_controller.stop_warning()
-				self.led_controller.emit_stopped_signal()
+				self.led_controller.switch_off_leds()
 				break
 			except:
 				sys.exit()

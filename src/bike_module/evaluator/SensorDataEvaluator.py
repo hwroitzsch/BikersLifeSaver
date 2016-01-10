@@ -22,7 +22,8 @@ class SensorDataEvaluator:
 		self.last_inform_server_datetime = None
 
 	def evaluate(self, processed_sensor_data):
-		print('evaluating sensor data')
+		if config.development_mode:
+			print('evaluating sensor data')
 
 		# TODO:
 		# depending on where the data comes from,

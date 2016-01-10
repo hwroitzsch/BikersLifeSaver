@@ -14,6 +14,7 @@ from model.ProcessedCameraData import ProcessedCameraData
 from writer.ImageFileWriter import ImageFileWriter
 from algorithm.LabelCounting import LabelCounting
 
+from helper.TimeFunction import TimeFunction
 
 class CameraDataProcessor(SensorDataProcessor):
 	def __init__(self):
@@ -21,8 +22,6 @@ class CameraDataProcessor(SensorDataProcessor):
 		self.processed_image_counter = 0
 
 		print('using OpenCV version:', opencv.__version__)
-
-		
 
 		if config.use_demo_thresholds:
 			print('Using demo HSV thresholds.')
@@ -142,10 +141,10 @@ class CameraDataProcessor(SensorDataProcessor):
 				processed_image_file_path = str(self.processed_image_counter) + '_step_6_test_image_eroded' + '.PNG'
 
 				self.image_file_writer.write_images(
-					#original_image_file_path, image,
-					mean_filtered_image_path, mean_filtered,
+					original_image_file_path, image,
+					#mean_filtered_image_path, mean_filtered,
 					#hsv_image_file_path, hsv_image,
-					mask_image_file_path, mask_image,
+					#mask_image_file_path, mask_image,
 					#closing_image_file_path, closing_image,
 					#eroded_image_file_path, eroded_image,
 					processed_image_file_path, result_image
@@ -158,35 +157,35 @@ class CameraDataProcessor(SensorDataProcessor):
 
 				if config.development_mode:
 					print('TIMINGS FOR PROCESSING:')
-					print('TIME MEAN FILTERING: ', calculate_time_diff(t1_mean_filtering, t2_mean_filtering), 's', sep='')
-					print('TIME HSV CONVERSION: ', calculate_time_diff(t1_hsv_image, t2_hsv_image), 's', sep='')
-					print('TIME MASKING: ', calculate_time_diff(t1_mask, t2_mask), 's', sep='')
-					print('TIME CLOSING: ', calculate_time_diff(t1_closing, t2_closing), 's', sep='')
-					print('TIME BORDERING: ', calculate_time_diff(t1_bordering, t2_bordering), 's', sep='')
-					print('TIME ERODING: ', calculate_time_diff(t1_erode, t2_erode), 's', sep='')
-					print('TIME LABEL COUNTING: ', calculate_time_diff(t1_label_counting, t2_label_counting), 's', sep='')
-					print('TIME SEARCH FOR LABELS: ', calculate_time_diff(t1_search, t2_search), 's', sep='')
+					print('TIME MEAN FILTERING: ', TimeFunction.calculate_time_diff(t1_mean_filtering, t2_mean_filtering), 's', sep='')
+					print('TIME HSV CONVERSION: ', TimeFunction.calculate_time_diff(t1_hsv_image, t2_hsv_image), 's', sep='')
+					print('TIME MASKING: ', TimeFunction.calculate_time_diff(t1_mask, t2_mask), 's', sep='')
+					print('TIME CLOSING: ', TimeFunction.calculate_time_diff(t1_closing, t2_closing), 's', sep='')
+					print('TIME BORDERING: ', TimeFunction.calculate_time_diff(t1_bordering, t2_bordering), 's', sep='')
+					print('TIME ERODING: ', TimeFunction.calculate_time_diff(t1_erode, t2_erode), 's', sep='')
+					print('TIME LABEL COUNTING: ', TimeFunction.calculate_time_diff(t1_label_counting, t2_label_counting), 's', sep='')
+					print('TIME SEARCH FOR LABELS: ', TimeFunction.calculate_time_diff(t1_search, t2_search), 's', sep='')
 
 					print('found direction indicator')
 
-				return ProcessedCameraData(probability=100.0, result=True)
+				return ProcessedCameraData(100.0, True)
 			else:
 				t2_search = datetime.now()
 				
 				if config.development_mode:
 					print('TIMINGS FOR PROCESSING:')
-					print('TIME MEAN FILTERING: ', calculate_time_diff(t1_mean_filtering, t2_mean_filtering), 's', sep='')
-					print('TIME HSV CONVERSION: ', calculate_time_diff(t1_hsv_image, t2_hsv_image), 's', sep='')
-					print('TIME MASKING: ', calculate_time_diff(t1_mask, t2_mask), 's', sep='')
-					print('TIME CLOSING: ', calculate_time_diff(t1_closing, t2_closing), 's', sep='')
-					print('TIME BORDERING: ', calculate_time_diff(t1_bordering, t2_bordering), 's', sep='')
-					print('TIME ERODING: ', calculate_time_diff(t1_erode, t2_erode), 's', sep='')
-					print('TIME LABEL COUNTING: ', calculate_time_diff(t1_label_counting, t2_label_counting), 's', sep='')
-					print('TIME SEARCH FOR LABELS: ', calculate_time_diff(t1_search, t2_search), 's', sep='')
+					print('TIME MEAN FILTERING: ', TimeFunction.calculate_time_diff(t1_mean_filtering, t2_mean_filtering), 's', sep='')
+					print('TIME HSV CONVERSION: ', TimeFunction.calculate_time_diff(t1_hsv_image, t2_hsv_image), 's', sep='')
+					print('TIME MASKING: ', TimeFunction.calculate_time_diff(t1_mask, t2_mask), 's', sep='')
+					print('TIME CLOSING: ', TimeFunction.calculate_time_diff(t1_closing, t2_closing), 's', sep='')
+					print('TIME BORDERING: ', TimeFunction.calculate_time_diff(t1_bordering, t2_bordering), 's', sep='')
+					print('TIME ERODING: ', TimeFunction.calculate_time_diff(t1_erode, t2_erode), 's', sep='')
+					print('TIME LABEL COUNTING: ', TimeFunction.calculate_time_diff(t1_label_counting, t2_label_counting), 's', sep='')
+					print('TIME SEARCH FOR LABELS: ', TimeFunction.calculate_time_diff(t1_search, t2_search), 's', sep='')
 
 					print('no direction indicator found')
 
-				return ProcessedCameraData(probability=100.0, result=False)
+				return ProcessedCameraData(100.0, False)
 
 def calculate_time_diff(t1, t2):
 	return (t2 - t1).microseconds / (1*10**6) + (t2-t1).seconds
