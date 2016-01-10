@@ -98,11 +98,6 @@ class CameraDataProcessor(SensorDataProcessor):
 			closing_image = opencv.morphologyEx(mask_image, opencv.MORPH_CLOSE, kernel)
 			t2_closing = datetime.now()
 
-			# count labels
-			t1_label_counting = datetime.now()
-			self.last_label_count = self.label_counting.count_labels(closing_image)
-			t2_label_counting = datetime.now()
-
 			# create border around the image to create "fair" conditions for each pixel in the closing and erode step
 			t1_bordering = datetime.now()
 			border_top = 3
@@ -126,6 +121,11 @@ class CameraDataProcessor(SensorDataProcessor):
 				border_right
 			)
 			t2_erode = datetime.now()
+
+			# count labels
+			t1_label_counting = datetime.now()
+			self.last_label_count = self.label_counting.count_labels(eroded_image)
+			t2_label_counting = datetime.now()
 
 			# set the result
 			result_image = eroded_image
