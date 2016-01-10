@@ -28,9 +28,9 @@ class CameraDataProcessor(SensorDataProcessor):
 
 		if config.use_demo_thresholds:
 			# diff: 20 70 35
-			# hsv in gimp: 12 89 100
-			self.lower_blinker_hsv = np.uint8([10, 70, 225])  # 360° - 80°
-			self.upper_blinker_hsv = np.uint8([25, 105, 255])  # 360° - 100°
+			# hsv in gimp: 25 88 91
+			self.lower_blinker_hsv = np.uint8([15, 75, 225])  # 360° - 80°
+			self.upper_blinker_hsv = np.uint8([30, 100, 245])  # 360° - 100°
 		else:
 			self.lower_blinker_hsv = np.uint8([260, 150, 220])  # 360° - 80°
 			self.upper_blinker_hsv = np.uint8([280, 220, 255])  # 360° - 100°
