@@ -48,13 +48,16 @@ class CameraDataProcessor(SensorDataProcessor):
 		self.label_counting = LabelCounting()
 
 	def create_kernel(self, rows=3, cols=3):
+		"""creates a kernel for image processing operations"""
 		return np.ones((rows, cols), dtype=np.int)
 
 	def print_rows_cols(self, image):
+		"""prints the dimensions of an image"""
 		rows_and_cols = image.shape
 		print('Rows and cols:', rows_and_cols)
 
 	def add_border(self, image, top, bottom, left, right, color=0):
+		"""adds a border with brightness value color and given widths to a given image"""
 		return opencv.copyMakeBorder(
 			image,
 			top, bottom, left, right,
@@ -63,10 +66,12 @@ class CameraDataProcessor(SensorDataProcessor):
 		)
 
 	def remove_border(self, image, top, bottom, left, right):
+		"""removes a border with given widths of a given image"""
 		rows_and_cols = image.shape
 		return image[top:rows_and_cols[0] - bottom, left:rows_and_cols[1] - right]
 
 	def process_data(self, camera_data):
+		"""processes given camera data"""
 		previous_labels_count = self.last_label_count
 
 		image = camera_data.data
@@ -77,10 +82,10 @@ class CameraDataProcessor(SensorDataProcessor):
 			kernel_width = 4
 			kernel_height = 4
 			kernel = np.ones((kernel_width, kernel_height)) / (kernel_width * kernel_height)
-			
+
 			mean_filtered = opencv.filter2D(image, -1, kernel)
 			t2_mean_filtering = datetime.now()
-			
+
 			# convert to HSV image
 			hsv_image = opencv.cvtColor(mean_filtered, opencv.COLOR_RGB2HSV)
 			t1_hsv_image = datetime.now()
@@ -155,7 +160,7 @@ class CameraDataProcessor(SensorDataProcessor):
 
 			t1_search = datetime.now()
 
-			if any(255 in x for x in result_image) or self.last_label_count != previous_labels_count:
+			if any(255 in x for x in result_image) or self.last_label_count > previous_labels_count:
 				t2_search = datetime.now()
 
 				if config.development_mode:
@@ -174,7 +179,7 @@ class CameraDataProcessor(SensorDataProcessor):
 				return ProcessedCameraData(100.0, True)
 			else:
 				t2_search = datetime.now()
-				
+
 				if config.development_mode:
 					print('TIMINGS FOR PROCESSING:')
 					print('TIME MEAN FILTERING: ', TimeFunction.calculate_time_diff(t1_mean_filtering, t2_mean_filtering), 's', sep='')
@@ -191,4 +196,5 @@ class CameraDataProcessor(SensorDataProcessor):
 				return ProcessedCameraData(100.0, False)
 
 def calculate_time_diff(t1, t2):
+	"""calculates the difference of two given datetimes"""
 	return (t2 - t1).microseconds / (1*10**6) + (t2-t1).seconds
